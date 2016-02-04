@@ -1,0 +1,31 @@
+{
+  "author": "Gentics Software",
+  "name": "ExpressMesh",
+  "description":"A Gentics Mesh frontend for Express.",
+  "license":"MIT",
+  "version": "0.1.0",
+  "main": "./lib/index.js",
+  "dependencies": {
+    "express": "4.13.3",
+    "express-session": "1.12.1",
+    "moment": "2.10.6",
+    "q": "^1.4.1",
+    "swig": "1.4.2"
+  },
+  "devDependencies": {
+    "gulp": "~3.6.1",
+    "gulp-concat": "~2.2.0",
+    "gulp-debug": "^2.1.2",
+    "gulp-rimraf": "*",
+    "gulp-strip-debug": "*",
+    "gulp-tslint": "~1.1.0",
+    "gulp-tslint-stylish": "~1.0.1",
+    "gulp-typedoc": "^1.2.1",
+    "gulp-typescript": "~2.8.0",
+    "gulp-uglify": "~0.2.1",
+    "gulp-util": "~2.2.14",
+    "merge2": "*",
+    "path": "~0.4.9",
+    "run-sequence": "^1.1.5"
+  }
+}

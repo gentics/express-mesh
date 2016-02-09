@@ -65,7 +65,60 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<p>A Gentics Mesh frontend for Express.</p>
+				<h1 id="express-mesh">express-mesh</h1>
+				<p>An extension for express to serve content from Gentics Mesh.</p>
+				<p>To get/download Gentics Mesh, check out <a href="http://getmesh.io/">http://getmesh.io/</a>.</p>
+				<h2 id="features">Features</h2>
+				<ul>
+					<li>Serve websites powerded by Gentics Mesh</li>
+					<li>Swig template engine</li>
+					<li>Custom template filters</li>
+					<li>Custom schema, error and view handlers</li>
+					<li>Usable with pure JavaScript and TypeScript</li>
+					<li>Completely typed API with TypeScript</li>
+				</ul>
+				<h2 id="how-to-install">How to install</h2>
+				<h5 id="1-install-gulp">1. Install gulp</h5>
+				<pre><code class="lang-shell">npm install -save express-mesh
+</code></pre>
+				<h2 id="basic-usage">Basic Usage</h2>
+				<p>Below is a minimal express app will serve content from a local mesh installation.</p>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+<span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>);
+<span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<span class="hljs-keyword">var</span> cookieParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cookie-parser'</span>);
+<span class="hljs-keyword">var</span> bodyParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'body-parser'</span>);
+<span class="hljs-keyword">var</span> session = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express-session'</span>);
+<span class="hljs-keyword">var</span> swig = <span class="hljs-built_in">require</span>(<span class="hljs-string">"swig"</span>);
+<span class="hljs-keyword">var</span> expressCompression = <span class="hljs-built_in">require</span>(<span class="hljs-string">'compression'</span>);
+<span class="hljs-keyword">var</span> cons = <span class="hljs-built_in">require</span>(<span class="hljs-string">'consolidate'</span>);
+<span class="hljs-keyword">var</span> mesh = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express-mesh'</span>);
+
+<span class="hljs-keyword">var</span> port    = process.env.PORT || <span class="hljs-number">8089</span>,
+    app : express.Express = express(),
+    server = http.createServer(app),
+    viewDir = __dirname + <span class="hljs-string">'/views'</span>,
+    langDir = __dirname + <span class="hljs-string">'/languages'</span>,
+    Mesh = <span class="hljs-keyword">new</span> mesh.Mesh(<span class="hljs-keyword">new</span> mesh.MeshConfig(<span class="hljs-string">'Demo'</span>, viewDir, langDir));
+
+app.set(<span class="hljs-string">'views'</span>, viewDir);
+app.engine(<span class="hljs-string">'html'</span>, cons.swig);
+app.set(<span class="hljs-string">'view engine'</span>, <span class="hljs-string">'html'</span>);
+app.use(expressCompression());
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: <span class="hljs-literal">true</span> }));
+
+app.use(session({
+    secret: <span class="hljs-string">'mysupersecuresessionsecret'</span>,
+    resave: <span class="hljs-literal">false</span>,
+    saveUninitialized: <span class="hljs-literal">false</span>
+}));
+<span class="hljs-comment">// serving of static resources</span>
+app.use(express.static(path.join(__dirname, <span class="hljs-string">'public'</span>)));
+<span class="hljs-comment">// initialize the mesh frontend</span>
+Mesh.server(app);
+</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

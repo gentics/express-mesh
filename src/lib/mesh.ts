@@ -84,17 +84,26 @@ import {MeshRestResponse} from "./meshRestClient";
         filter? : any;
     }
 
+    /**
+     * Mesh object reference.
+     */
     export interface IMeshRef {
         name? : string;
         uuid? : string;
     }
 
+    /**
+     * Mesh node reference.
+     */
     export interface IMeshNodeRef {
         displayName : string;
         uuid : string;
         schema : IMeshRef;
     }
 
+    /**
+     * Possible mesh permissions.
+     */
     export enum MeshPermission {
         CREATE = <any>"create",
         READ = <any>"read",
@@ -102,16 +111,27 @@ import {MeshRestResponse} from "./meshRestClient";
         DELETE = <any>"delete"
     }
 
+    /**
+     * Mesh navigation object.
+     * The mesh navigation object has a root node, which is a MeshNavElement.
+     */
     export interface IMeshNav {
         root : IMeshNavElement;
     }
 
+    /**
+     * MeshNavElement.
+     * Consists of the uuid of the node, the node itself and its children.
+     */
     export interface IMeshNavElement {
         uuid : string;
         node : IMeshNode<any>;
         children : Array<IMeshNavElement>;
     }
 
+    /**
+     * A Mesh object. This object is the base for more complex objects, such as Mesh Nodes.
+     */
     export interface IMeshObject {
         uuid : string;
         creator : IMeshRef;
@@ -121,19 +141,33 @@ import {MeshRestResponse} from "./meshRestClient";
         permissions : Array<MeshPermission>;
     }
 
+    /**
+     * Representation of a tag family in mesh.
+     */
     export interface IMeshTagFamily extends IMeshObject {
         name : string;
     }
 
+    /**
+     * Fields node for the MeshTag containing the "value" of the tag as name.
+     */
     export interface ITagFields {
         name : string;
     }
 
+    /**
+     * Representation of a MeshTag.
+     */
     export interface IMeshTag extends IMeshObject {
         tagFamily : IMeshRef;
         fields : ITagFields;
     }
 
+    /**
+     * Representation of a MeshNode.
+     * This representation is generic, because its fields are defined in the
+     * Schema of the node.
+     */
     export interface IMeshNode<T> {
         uuid : string;
         creator : IMeshRef;
@@ -156,6 +190,9 @@ import {MeshRestResponse} from "./meshRestClient";
         container: boolean;
     }
 
+    /**
+     * Container for a node's tags.
+     */
     export interface IMeshTags {
         [tagFamily: string]: {
             uuid: string;
@@ -163,6 +200,9 @@ import {MeshRestResponse} from "./meshRestClient";
         };
     }
 
+    /**
+     * Representation for a node with binary content.
+     */
     export interface BinaryNode<T> extends IMeshNode<T> {
         binaryProperties: {
             sha512sum: string;
@@ -173,37 +213,98 @@ import {MeshRestResponse} from "./meshRestClient";
         path: string;
     }
 
+    /**
+     * Main entry point for the frontend API. Use this class to power your express mesh server.
+     *
+     * Usage:
+     *  import * as mesh from 'express-mesh';
+     *  var Mesh = new mesh.Mesh(new mesh.MeshConfig('Demo', 'public', 'languages'));
+     *  Mesh.server(app);
+     */
     export class Mesh {
 
         private meshClient : MeshRestClient;
         private renderer : MeshRenderer;
 
+        /**
+         * Constructor for the main frontend API entry point.
+         * @param config Configuration for the mesh server.
+         */
         constructor(private config : MeshConfig) {
-
             this.meshClient = new MeshRestClient();
             this.renderer = new MeshRenderer(this.config.viewDirectory);
         }
 
+        /**
+         * Register a custom schema handler.
+         * A registered schema handler will be executed before a node with the schema it has been
+         * registered for will be rendered. This can be used to fetch additional information and
+         * perform operations on the data provided by Mesh.
+         * @param schema Schema the handler should be registered for
+         * @param handler The handler that should be registered
+         */
         public registerSchemaHandler<T>(schema : string, handler : IMeshSchemaHandler<T>) : void {
             this.renderer.registerSchemaHandler(schema, handler);
         }
 
+        /**
+         * Register a custom view handler.
+         * A view handler will be executed every time before a view is being rendered by the Mesh
+         * frontend. This can be used to fetch additional information and perform operations on the
+         * data provided by Mesh.
+         * @param handler The handler that should be registered
+         */
         public registerViewHandler(handler : IMeshViewHandler) : void {
             this.renderer.registerViewRenderHandler(handler);
         }
 
+        /**
+         * Register a custom error handler.
+         * A error handler will be executed if an error with the status it has been registered for
+         * occurs.
+         * @param status The status the handler should be registered for
+         * @param handler The handler that should be registered
+         */
         public registerErrorHandler(status : number, handler : IMeshErrorHandler) : void {
             this.renderer.registerErrorHandler(status, handler);
         }
 
+        /**
+         * Render a Mesh node.
+         * This function will render the provided node with the view that is named after the node's schema.
+         * If the view with this name is not available, the default view will be rendered.
+         * All registered handlers that apply for this function will be executed.
+         * @param node Mesh node that should be rendered.
+         * @param req The mesh request / Express request.
+         * @param res The mesh response / Express response.
+         */
         public renderMeshNode(node : IMeshNode<any>, req : IMeshRequest, res : IMeshResponse) : void {
             this.renderer.renderMeshNode(node, req, res);
         }
 
+        /**
+         * Render a view.
+         * This function will render the provided view.
+         * If the view with this name is not available, the default view will be rendered.
+         * All registered handlers that apply for this function will be executed.
+         * @param view name of the view that should be rendered.
+         * @param renderdata Data that should be passed to the view.
+         * @param req The mesh request / Express request.
+         * @param res The mesh response / Express response.
+         */
         public renderView(view : string, renderdata : RenderData, req : IMeshRequest, res : IMeshResponse) : void {
             this.renderer.renderView(view, renderdata, req, res);
         }
 
+        /**
+         * Login to Gentics Mesh with the provided user. All subsequent requests with the same session
+         * will use the provided credentials for requests to Mesh.
+         * @param req The mesh request / Express request.
+         * @param username Login
+         * @param password Password
+         * @returns {Promise<U>} A promise that will be fulfilled as soon es the login completes and will
+         *          be rejected if the login fails.
+         */
         public login(req : IMeshRequest, username : string, password : string) : Q.Promise<boolean> {
             return this.meshClient.login(req, username, password).then((loggedin) => {
                 if (loggedin === true) {
@@ -214,6 +315,13 @@ import {MeshRestResponse} from "./meshRestClient";
             });
         }
 
+        /**
+         * Logout from Gentics Mesh. All subsequent requests with the same session will use the default
+         * user that has been configured in the MeshConfig for requests to Mesh.
+         * @param req The mesh request / Express request.
+         * @returns {Promise<U>} A promise that will be fulfilled as soon as the logout completes and will
+         *          be rejected if the logout fails.
+         */
         public logout(req : IMeshRequest) : Q.Promise<boolean> {
             return this.meshClient.logout(req).then((loggedout) => {
                 req.session[rest.MeshAuth.MESH_USER_SESSION_KEY] = undefined;
@@ -222,40 +330,102 @@ import {MeshRestResponse} from "./meshRestClient";
             })
         }
 
+        /**
+         * Perform a search for Mesh Nodes.
+         * @param req The mesh request / Express request.
+         * @param query The elastic search query object.
+         * @param params NodeListParams to implement pagination.
+         * @returns {Promise<U>} A promise that will be fulfilled once the search request complets and will be rejected
+         *          if the search fails.
+         */
         public searchMeshNodes<T>(req : IMeshRequest, query : IMeshSearchQuery, params? : IMeshNodeListQueryParams) : Q.Promise<IMeshNodeListResponse<IMeshNode<T>>> {
             return this.meshClient.meshSearch<IMeshNode<T>>(req, query, params).then((response)=> {
                 return response.data;
             });
         }
 
+        /**
+         * Load all child nodes of a specified node.
+         * @param req The mesh request / Express request.
+         * @param uuid The specified node, which children should be loaded.
+         * @param lang The language the nodes should be loaded in.
+         * @param opts NodeListParams to implement pagination.
+         * @returns {Promise<U>} A promise that will be fulfilled once the children have been loaded and will be rejected
+         *          if loading the children fails.
+         */
         public getChildren<T>(req : IMeshRequest, uuid : string, lang : string, opts? : IMeshNodeListQueryParams) : Q.Promise<IMeshNodeListResponse<IMeshNode<T>>> {
             return this.meshClient.getChildren<T>(req, uuid, lang, opts).then((response) => {
                 return response.data;
             });
         }
 
+        /**
+         * Load a Mesh node with the specified uuid.
+         * @param req The mesh request / Express request.
+         * @param uuid The uuid of the node that should be loaded.
+         * @param params QueryParams to specify the language and other options.
+         * @returns {Promise<U>} A promise that will be fulfilled once the Mesh node is loaded and will be rejected
+         *          if loading of the Mesh node fails.
+         */
         public getMeshNode<T>(req : IMeshRequest, uuid : string, params? : MeshQueryParams) : Q.Promise<IMeshNode<T>> {
             return this.meshClient.getMeshNode<T>(req, uuid, params).then((response)=> {
                 return response.data;
             });
         }
 
+        /**
+         * Load a navigation object by its path. e.g. / for the root navigation.
+         * You can only load navigation objects for container nodes.
+         * @param req The mesh request / Express request.
+         * @param path The path for which the navigation object should be loaded.
+         * @param maxDepth Maximal depth of the loaded navigation tree.
+         * @returns {Q.Promise<MeshRestResponse<IMeshNav>>} A promise that will be fulfilled once the navigation object
+         *          has been loaded and will be rejected if loading of the navigation object fails.
+         */
         public getNavigationByPath(req : IMeshRequest, path : string, maxDepth? : number) : Q.Promise<MeshRestResponse<IMeshNav>> {
             return this.meshClient.getNavigationByPath(req, path, maxDepth);
         }
 
+        /**
+         * Load a navigation object by its uuid.
+         * You can only load navigation objects for container nodes.
+         * @param req The mesh request / Express request.
+         * @param uuid The uuid of the root node of the navigation tree you want to load.
+         * @param maxDepth Maximal depth of the loaded navigation tree.
+         * @returns {Q.Promise<MeshRestResponse<IMeshNav>>} A promise that will be fulfilled once the navigation object
+         *          has been loaded and will be rejected if loading of the navigation object fails.
+         */
         public getNavigationByUUID(req : IMeshRequest, uuid : string, maxDepth? : number) : Q.Promise<MeshRestResponse<IMeshNav>> {
             return this.meshClient.getNavigationByUUID(req, uuid, maxDepth);
         }
 
+        /**
+         * Load the tag families of the current project.
+         * @param req The mesh request / Express request.
+         * @param params Query params to specify pagination.
+         * @returns {Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshTagFamily>>>} A promise that will be fulfilled once
+         *          the tag families have been loaded and will be rejected if loading of the tag families fails.
+         */
         public getTagFamilies(req : IMeshRequest, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshTagFamily>>> {
             return this.meshClient.getTagFamilies(req, params);
         }
 
+        /**
+         * Load the tags that are contained in a tag family.
+         * @param req The mesh request / Express request.
+         * @param uuid The uuid of the tag family.
+         * @param params Query params to specify pagination.
+         * @returns {Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshTag>>>} A promise that will be fulfilled once
+         *          the tags have been loaded and will fail if loading of the tags fail.
+         */
         public getTagsOfTagFamily(req : IMeshRequest, uuid : string, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshTag>>> {
             return this.meshClient.getTagsOfTagFamily(req, uuid, params);
         }
 
+        /**
+         * Private method that constructs the quest handler, that will serve the Mesh content from webroot.
+         * @returns {function(IMeshRequest, express.Response): undefined}
+         */
         private getRequestHandler() : (req : express.Request, res : express.Response)=>void {
             return (req : IMeshRequest, res : express.Response) => {
                 this.meshClient.getWebrootNode<IMeshNode<any>>(req).then((response : MeshRestResponse<IMeshNode<any>>) => {
@@ -276,7 +446,13 @@ import {MeshRestResponse} from "./meshRestClient";
             };
         }
 
-        public registerMeshMiddleware(app : express.Express) : void {
+        /**
+         * Private method that will register the mesh middleware in the Express app.
+         * This middleware will enrich the mesh request with the configuration and the
+         * active language.
+         * @param app The Express app.
+         */
+        private registerMeshMiddleware(app : express.Express) : void {
             app.use('*', (req : IMeshRequest, res : IMeshResponse, next : Function) => {
                 if (!u.isDefined(req.meshConfig)) {
                     req.meshConfig = this.config;
@@ -289,6 +465,11 @@ import {MeshRestResponse} from "./meshRestClient";
             });
         }
 
+        /**
+         * Initialize the Mesh server. Call this method after you added your own request handlers to the Express app,
+         * as this method will attach a * handler to catch all requests that have not been handled by another handler.
+         * @param app The Express app.
+         */
         public server(app : express.Express) : void {
             this.registerMeshMiddleware(app);
             app.get('*', this.getRequestHandler());

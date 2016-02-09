@@ -15,7 +15,7 @@ Features
 
 How to install
 --------------
-##### 1. Install gulp
+##### 1. Install express-mesh
 ```shell
 npm install -save express-mesh
 ```

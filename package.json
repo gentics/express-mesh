@@ -1,10 +1,9 @@
 {
-  "author": "Gentics Software",
-  "name": "ExpressMesh",
-  "description":"A Gentics Mesh frontend for Express.",
-  "license":"MIT",
+  "author": "Gentics Zweigstelle der APA-IT",
+  "name": "express-mesh",
+  "description": "A Gentics Mesh frontend for Express.",
+  "license": "MIT",
   "version": "0.1.0",
-  "main": "./lib/index.js",
   "dependencies": {
     "express": "4.13.3",
     "express-session": "1.12.1",
@@ -27,5 +26,26 @@
     "merge2": "*",
     "path": "~0.4.9",
     "run-sequence": "^1.1.5"
-  }
+  },
+  "main": "index.js",
+  "typescript": {
+    "definition": "./index.d.ts"
+  },
+  "typings":"./index.d.ts",
+  "directories": {
+    "doc": "doc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gentics/express-mesh.git"
+  },
+  "keywords": [
+    "express",
+    "mesh",
+    "frontend"
+  ],
+  "bugs": {
+    "url": "https://github.com/gentics/express-mesh/issues"
+  },
+  "homepage": "https://github.com/gentics/express-mesh#readme"
 }

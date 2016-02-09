@@ -1,5 +1,3 @@
-'use strict';
-
 export * from './lib/mesh';
 export * from './lib/meshRenderer';
 export * from './lib/meshUtil';

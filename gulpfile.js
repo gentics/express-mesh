@@ -13,7 +13,7 @@ var tsProject = ts.createProject({
 });
 
 gulp.task('clean', function() {
-    return gulp.src(['./lib/**/*.js','./definitions/**/*.d.ts'], { read: false })
+    return gulp.src(['./lib/**/*.js','./lib/**/*.d.ts'], { read: false })
         .pipe(rimraf());
 });
 
@@ -34,8 +34,8 @@ gulp.task('typedoc', function() {
 gulp.task('build', function() {
     var tsResult = gulp.src(['./src/**/*.ts', './devtypes/**/*.ts'])
         .pipe(ts(tsProject));
-    tsResult.dts.pipe(gulp.dest('./definitions'));
-    return tsResult.js.pipe(gulp.dest('./lib'));
+    tsResult.dts.pipe(gulp.dest('./'));
+    return tsResult.js.pipe(gulp.dest('./'));
 });
 
 gulp.task('package',function(callback) {
@@ -46,5 +46,5 @@ gulp.task('package',function(callback) {
 });
 
 gulp.task('watch', ['build'], function() {
-    gulp.watch('lib/*.ts', ['build']);
+    gulp.watch('src/**/*.ts', ['build']);
 });

@@ -31,13 +31,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var swig = require("swig");
+var swig = require('swig');
 var expressCompression = require('compression');
 var cons = require('consolidate');
 var mesh = require('express-mesh');
 
-var port    = process.env.PORT || 8089,
-    app : express.Express = express(),
+var port  = process.env.PORT || 8089,
+    app  = express(),
     server = http.createServer(app),
     viewDir = __dirname + '/views',
     langDir = __dirname + '/languages',

@@ -18,15 +18,24 @@ import {IMeshTagFamily} from "./mesh";
 import {IMeshTag} from "./mesh";
 import {MeshQueryParams} from "./mesh";
 
+/**
+ * Mesh Rest response object
+ */
 export class MeshRestResponse<T> {
     public stream : http.IncomingMessage;
     constructor(public status : number, public data : T, public isBinary : boolean){}
 }
 
+/**
+ * Possible authentication methods.
+ */
 export enum MeshAuthType {
     BASIC
 }
 
+/**
+ * Mesh authentication obejct.
+ */
 export class MeshAuth {
     public static MESH_USER_SESSION_KEY = 'meshusername';
     public static MESH_PASSWORD_SESSION_KEY = 'meshpassword';
@@ -34,6 +43,11 @@ export class MeshAuth {
     type : MeshAuthType;
     header : string;
 
+    /**
+     * Initialize the Mesh authentication object.
+     * It generates the needed authentication header for making Mesh requests.
+     * @param request The MeshRequest
+     */
     constructor(request : IMeshRequest) {
         this.type = MeshAuthType.BASIC;
         if (u.isDefined(request.session[MeshAuth.MESH_USER_SESSION_KEY]) && u.isDefined(request.session[MeshAuth.MESH_PASSWORD_SESSION_KEY])) {
@@ -49,6 +63,9 @@ export class MeshAuth {
     }
 }
 
+/**
+ * Options for making Mesh Requests.
+ */
 export class MeshRequestOptions {
     url : string;
     method : string;
@@ -62,6 +79,9 @@ export class MeshRequestOptions {
     }
 }
 
+/**
+ * MeshRestClient that can be used to make requests to the mesh backend.
+ */
 export class MeshRestClient {
 
     private static NODES_ENDPOINT = '/nodes/';

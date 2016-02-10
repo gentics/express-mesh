@@ -7,11 +7,19 @@ import fs = require('fs');
 import {MeshConfig} from "./config";
 import {IMeshRequest} from "./mesh";
 
+/**
+ * Cache object, where the language JSONs will be stored.
+ * @type {{}}
+ */
 var langCache : { [key:string]:any; } = {};
 // TODO: This is a hack for now, we net to properly access the current language
 var actLang : string;
 var initialized : boolean = false;
 
+/**
+ * Read the language files from the configured language folder and populate the langCache object.
+ * @param config MeshConfiguration
+ */
 export function readLanguageFiles(config : MeshConfig) : void {
     var langFilePath = config.languageDirectory;
     if (!initialized || config.development) {
@@ -35,6 +43,11 @@ export function readLanguageFiles(config : MeshConfig) : void {
     }
 }
 
+/**
+ * Get the active language form the MeshRequest.
+ * @param req The MeshRequest
+ * @returns {string} The current language or default language if none is set.
+ */
 export function getActiveLanguage(req : IMeshRequest) : string {
     var active : string = req.meshConfig.languages[0];
 
@@ -44,6 +57,11 @@ export function getActiveLanguage(req : IMeshRequest) : string {
     return active;
 }
 
+/**
+ * Set the active language.
+ * @param req The MeshRequest
+ * @param lang The language code, that should be set as the current language.
+ */
 export function setActiveLanguage(req : IMeshRequest, lang : string) : void {
     var configuredLanguages = req.meshConfig.languages;
     if (u.isDefined(req.session) && configuredLanguages.indexOf(lang) > -1) {
@@ -51,6 +69,11 @@ export function setActiveLanguage(req : IMeshRequest, lang : string) : void {
     }
 }
 
+/**
+ * Get the language array sorted for language fallback with the Mesh backend.
+ * @param req The MeshRequest.
+ * @returns {string[]} The language array, where the current language is the first element.
+ */
 export function getLanguageArray(req : IMeshRequest) : Array<string> {
     var configuredLanguages = req.meshConfig.languages,
         activeLanguage = getActiveLanguage(req);
@@ -66,6 +89,11 @@ export function getLanguageArray(req : IMeshRequest) : Array<string> {
     });
 }
 
+/**
+ * Template filter to translate strings.
+ * @param input String that should be translated.
+ * @returns {string|any} Translated string or string if no translation is defined.
+ */
 export function translateFilter(input : string) : string {
     var replacement;
     replacement = u.isDefined(input)

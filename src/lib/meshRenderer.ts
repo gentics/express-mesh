@@ -17,12 +17,21 @@ import {IMeshErrorHandler} from "./meshHandlerStore";
 import {IMeshViewHandler} from "./meshHandlerStore";
 import {IMeshSchemaHandler} from "./meshHandlerStore";
 
+/**
+ * Render information that will be passed to the rendered template in the RenderData.
+ */
 export class RenderInformation {
     public activeLanguage : string;
     public availableLanguages : Array<string>;
     public languageURLs : { [key:string]:string; } = {};
     public username : string;
     public loggedin : boolean;
+
+    /**
+     * Constructor that initializes the render information.
+     * @param req The MeshRequest.
+     * @param node The MeshNode that should be rendered.
+     */
     constructor(req : IMeshRequest, node? : IMeshNode<any>) {
         this.activeLanguage = lang.getActiveLanguage(req);
         if (u.isDefined(node)) {
@@ -42,6 +51,9 @@ export class RenderInformation {
     }
 }
 
+/**
+ * Render data that is passed to the rendered template and contains the data that should be rendered.
+ */
 export class RenderData {
     public node : IMeshNode<any>;
     public nodes : Array<IMeshNode<any>>;
@@ -52,6 +64,9 @@ export class RenderData {
     }
 }
 
+/**
+ * The MeshRenderer is responsible for rendering templates.
+ */
 export class MeshRenderer {
 
     public static TEMPLATE_EXTENSION : string = '.html';
@@ -60,6 +75,10 @@ export class MeshRenderer {
     private errorHandlerStore : handler.ErrorHandlerStore;
     private viewHandlerStore : handler.ViewHandlerStore;
 
+    /**
+     * Initialize the renderer.
+     * @param viewDir Directory that contains the templates.
+     */
     constructor(private viewDir : string){
         filter.registerFilters();
         this.schemaHandlerStore = new handler.SchemaHandlerStore();

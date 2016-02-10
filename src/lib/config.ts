@@ -1,17 +1,36 @@
 'use strict';
 
+/**
+ * Mesh user configuration.
+ * This user will be used per default for all requests to Mesh.
+ */
 export class MeshAuthUser {
     public username : string = 'public';
     public password : string = 'public';
 }
 
+/**
+ * Configuration for logging output.
+ * data => logging for the JSON, that is returned from mesh
+ * timing => duration for requests to mesh
+ * renderdata => data that is being passed to the templates when rendering
+ */
 export class LoggingConfig {
     public data : boolean = false;
     public timing : boolean = true;
     public renderdata : boolean = false;
 }
 
+/**
+ * The configuration class for the Mesh API
+ */
 export class MeshConfig {
+    /**
+     * Constructor for the default configuration.
+     * @param project name of the project.
+     * @param viewDirectory directory where the templates are stored.
+     * @param languageDirectory directory where translation files are stored.
+     */
     constructor(project : string, viewDirectory : string, languageDirectory : string) {
         this.meshProject = project;
         this.viewDirectory = viewDirectory;

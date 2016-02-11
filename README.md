@@ -58,6 +58,8 @@ app.use(session({
 }));
 // serving of static resources
 app.use(express.static(path.join(__dirname, 'public')));
+// if we want to have the mesh template filters, we need to register them
+Mesh.registerTemplateFilters(swig);
 // initialize the mesh frontend
 Mesh.server(app);
 

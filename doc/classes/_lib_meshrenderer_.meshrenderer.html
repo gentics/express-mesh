@@ -70,6 +70,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The MeshRenderer is responsible for rendering templates.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -91,6 +98,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_meshrenderer_.meshrenderer.html#app" class="tsd-kind-icon">app</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_meshrenderer_.meshrenderer.html#errorhandlerstore" class="tsd-kind-icon">error<wbr>Handler<wbr>Store</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_meshrenderer_.meshrenderer.html#schemahandlerstore" class="tsd-kind-icon">schema<wbr>Handler<wbr>Store</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_lib_meshrenderer_.meshrenderer.html#viewdir" class="tsd-kind-icon">view<wbr>Dir</a></li>
@@ -113,6 +121,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_lib_meshrenderer_.meshrenderer.html#rendertemplate" class="tsd-kind-icon">render<wbr>Template</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_meshrenderer_.meshrenderer.html#renderview" class="tsd-kind-icon">render<wbr>View</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_lib_meshrenderer_.meshrenderer.html#resolvefield" class="tsd-kind-icon">resolve<wbr>Field</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_meshrenderer_.meshrenderer.html#setapp" class="tsd-kind-icon">set<wbr>App</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_lib_meshrenderer_.meshrenderer.html#viewexists" class="tsd-kind-icon">view<wbr>Exists</a></li>
 							</ul>
 						</section>
@@ -131,13 +140,23 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L61">lib/meshRenderer.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L80">lib/meshRenderer.ts:80</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Initialize the renderer.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>viewDir: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Directory that contains the templates.</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_lib_meshrenderer_.meshrenderer.html" class="tsd-signature-type">MeshRenderer</a></h4>
@@ -148,12 +167,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="app" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> app</h3>
+					<div class="tsd-signature tsd-kind-icon">app<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">express.Express</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L80">lib/meshRenderer.ts:80</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="errorhandlerstore" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> error<wbr>Handler<wbr>Store</h3>
 					<div class="tsd-signature tsd-kind-icon">error<wbr>Handler<wbr>Store<span class="tsd-signature-symbol">:</span> <a href="_lib_meshhandlerstore_.errorhandlerstore.html" class="tsd-signature-type">ErrorHandlerStore</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L60">lib/meshRenderer.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L77">lib/meshRenderer.ts:77</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -163,7 +192,7 @@
 					<div class="tsd-signature tsd-kind-icon">schema<wbr>Handler<wbr>Store<span class="tsd-signature-symbol">:</span> <a href="_lib_meshhandlerstore_.schemahandlerstore.html" class="tsd-signature-type">SchemaHandlerStore</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L59">lib/meshRenderer.ts:59</a></li>
+							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L76">lib/meshRenderer.ts:76</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -173,9 +202,14 @@
 					<div class="tsd-signature tsd-kind-icon">view<wbr>Dir<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L63">lib/meshRenderer.ts:63</a></li>
+							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L86">lib/meshRenderer.ts:86</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Directory that contains the templates.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="viewhandlerstore" class="tsd-anchor"></a>
@@ -183,7 +217,7 @@
 					<div class="tsd-signature tsd-kind-icon">view<wbr>Handler<wbr>Store<span class="tsd-signature-symbol">:</span> <a href="_lib_meshhandlerstore_.viewhandlerstore.html" class="tsd-signature-type">ViewHandlerStore</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L61">lib/meshRenderer.ts:61</a></li>
+							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L78">lib/meshRenderer.ts:78</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -193,7 +227,7 @@
 					<div class="tsd-signature tsd-kind-icon">TEMPLATE_<wbr>EXTENSION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L57">lib/meshRenderer.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L74">lib/meshRenderer.ts:74</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -210,7 +244,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L216">lib/meshRenderer.ts:216</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L254">lib/meshRenderer.ts:254</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -242,7 +276,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L205">lib/meshRenderer.ts:205</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L232">lib/meshRenderer.ts:232</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -271,7 +305,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L141">lib/meshRenderer.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L163">lib/meshRenderer.ts:163</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -300,7 +334,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L183">lib/meshRenderer.ts:183</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L205">lib/meshRenderer.ts:205</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -329,7 +363,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L74">lib/meshRenderer.ts:74</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L96">lib/meshRenderer.ts:96</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -355,7 +389,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L70">lib/meshRenderer.ts:70</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L92">lib/meshRenderer.ts:92</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -387,7 +421,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L78">lib/meshRenderer.ts:78</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L100">lib/meshRenderer.ts:100</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -410,7 +444,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L106">lib/meshRenderer.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L128">lib/meshRenderer.ts:128</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -442,7 +476,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L82">lib/meshRenderer.ts:82</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L104">lib/meshRenderer.ts:104</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -471,13 +505,13 @@
 					<a name="rendertemplate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> render<wbr>Template</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Template<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Template<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L211">lib/meshRenderer.ts:211</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L238">lib/meshRenderer.ts:238</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -489,7 +523,7 @@
 									<h5>data: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -503,7 +537,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L125">lib/meshRenderer.ts:125</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L147">lib/meshRenderer.ts:147</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -535,7 +569,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L160">lib/meshRenderer.ts:160</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L182">lib/meshRenderer.ts:182</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -545,6 +579,37 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setapp" class="tsd-anchor"></a>
+					<h3>set<wbr>App</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>App<span class="tsd-signature-symbol">(</span>app<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">express.Express</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L266">lib/meshRenderer.ts:266</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set the Express app to the renderer.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>app: <span class="tsd-signature-type">express.Express</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Express app.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -558,7 +623,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L120">lib/meshRenderer.ts:120</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshRenderer.ts#L142">lib/meshRenderer.ts:142</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -619,6 +684,9 @@
 								<a href="_lib_meshrenderer_.meshrenderer.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_lib_meshrenderer_.meshrenderer.html#app" class="tsd-kind-icon">app</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_lib_meshrenderer_.meshrenderer.html#errorhandlerstore" class="tsd-kind-icon">error<wbr>Handler<wbr>Store</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
@@ -668,6 +736,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="_lib_meshrenderer_.meshrenderer.html#resolvefield" class="tsd-kind-icon">resolve<wbr>Field</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_lib_meshrenderer_.meshrenderer.html#setapp" class="tsd-kind-icon">set<wbr>App</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="_lib_meshrenderer_.meshrenderer.html#viewexists" class="tsd-kind-icon">view<wbr>Exists</a>

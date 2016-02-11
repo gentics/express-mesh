@@ -84,6 +84,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_meshutil_.html#fileexists" class="tsd-kind-icon">file<wbr>Exists</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_meshutil_.html#getpath" class="tsd-kind-icon">get<wbr>Path</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_meshutil_.html#isdefined" class="tsd-kind-icon">is<wbr>Defined</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_meshutil_.html#isfunction" class="tsd-kind-icon">is<wbr>Function</a></li>
 							</ul>
 						</section>
 					</div>
@@ -97,7 +98,7 @@
 					<div class="tsd-signature tsd-kind-icon">STATUS_<wbr>ERROR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshUtil.ts#L59">lib/meshUtil.ts:59</a></li>
+							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshUtil.ts#L89">lib/meshUtil.ts:89</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -114,13 +115,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshUtil.ts#L32">lib/meshUtil.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshUtil.ts#L62">lib/meshUtil.ts:62</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A loop that iterates over a series of functions returning promises in sequence.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>items: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Array of function to iterate over.</p>
+									</div>
 								</li>
 								<li>
 									<h5>doLoopBody: <span class="tsd-signature-type">any</span></h5>
@@ -140,16 +149,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshUtil.ts#L7">lib/meshUtil.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshUtil.ts#L12">lib/meshUtil.ts:12</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if a file exists.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>path: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Path of the file to check.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise that will be resolved if the check finished and will be rejected if the check fails.</p>
 						</li>
 					</ul>
 				</section>
@@ -163,16 +181,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshUtil.ts#L23">lib/meshUtil.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshUtil.ts#L47">lib/meshUtil.ts:47</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the path from an URL.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>url: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>URL to convert to a path.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>The path part of a URL.</p>
 						</li>
 					</ul>
 				</section>
@@ -186,16 +213,57 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshUtil.ts#L19">lib/meshUtil.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshUtil.ts#L29">lib/meshUtil.ts:29</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Short hand to check if a variable is defined and not null.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>obj: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Variable to check.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>true if it is defined and not null, false otherwise.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="isfunction" class="tsd-anchor"></a>
+					<h3>is<wbr>Function</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Function<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshUtil.ts#L38">lib/meshUtil.ts:38</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Short hand to check if a variable is a function.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>obj: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Variable to check</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>true if it is a function, false otherwise.</p>
 						</li>
 					</ul>
 				</section>
@@ -252,6 +320,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_lib_meshutil_.html#isdefined" class="tsd-kind-icon">is<wbr>Defined</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_lib_meshutil_.html#isfunction" class="tsd-kind-icon">is<wbr>Function</a>
 					</li>
 				</ul>
 			</nav>

@@ -3,13 +3,12 @@
   "name": "express-mesh",
   "description": "A Gentics Mesh frontend for Express.",
   "license": "MIT",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "dependencies": {
     "express": "4.13.3",
     "express-session": "1.12.1",
     "moment": "2.10.6",
-    "q": "^1.4.1",
-    "swig": "1.4.2"
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "gulp": "~3.6.1",

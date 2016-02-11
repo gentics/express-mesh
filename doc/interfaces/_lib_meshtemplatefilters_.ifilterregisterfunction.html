@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IMeshSearchQuery | ExpressMesh</title>
+	<title>IFilterRegisterFunction | ExpressMesh</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,13 +57,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_lib_mesh_.html">&quot;lib/mesh&quot;</a>
+					<a href="../modules/_lib_meshtemplatefilters_.html">&quot;lib/meshTemplateFilters&quot;</a>
 				</li>
 				<li>
-					<a href="_lib_mesh_.imeshsearchquery.html">IMeshSearchQuery</a>
+					<a href="_lib_meshtemplatefilters_.ifilterregisterfunction.html">IFilterRegisterFunction</a>
 				</li>
 			</ul>
-			<h1>Interface IMeshSearchQuery</h1>
+			<h1>Interface IFilterRegisterFunction</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Search query structure for the elastic search in Mesh.</p>
+						<p>Interface for the FilterRegisterFunction. You can pass such a function to register the mesh filters to your
+						template engine.</p>
 					</div>
 				</div>
 			</section>
@@ -81,57 +82,43 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IMeshSearchQuery</span>
+						<span class="target">IFilterRegisterFunction</span>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_mesh_.imeshsearchquery.html#filter" class="tsd-kind-icon">filter</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_mesh_.imeshsearchquery.html#query" class="tsd-kind-icon">query</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_mesh_.imeshsearchquery.html#sort" class="tsd-kind-icon">sort</a></li>
+			<section class="tsd-panel">
+				<h3 class="tsd-before-signature">Callable</h3>
+				<ul class="tsd-signatures tsd-kind-interface tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>engine<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, filterfunction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshTemplateFilters.ts#L19">lib/meshTemplateFilters.ts:19</a></li>
 							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="filter" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> filter</h3>
-					<div class="tsd-signature tsd-kind-icon">filter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L86">lib/mesh.ts:86</a></li>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Interface for the FilterRegisterFunction. You can pass such a function to register the mesh filters to your
+								template engine.</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>engine: <span class="tsd-signature-type">any</span></h5>
+							</li>
+							<li>
+								<h5>key: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5>filterfunction: <span class="tsd-signature-type">Function</span></h5>
+							</li>
 						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="query" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> query</h3>
-					<div class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L85">lib/mesh.ts:85</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="sort" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> sort</h3>
-					<div class="tsd-signature tsd-kind-icon">sort<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L84">lib/mesh.ts:84</a></li>
-						</ul>
-					</aside>
-				</section>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -146,7 +133,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_config_.html">"lib/config"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_mesh_.html">"lib/mesh"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -161,7 +148,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_meshrestclient_.html">"lib/mesh<wbr>Rest<wbr>Client"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_lib_meshtemplatefilters_.html">"lib/mesh<wbr>Template<wbr>Filters"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -171,80 +158,30 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/_lib_mesh_.meshpermission.html" class="tsd-kind-icon">Mesh<wbr>Permission</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_lib_mesh_.mesh.html" class="tsd-kind-icon">Mesh</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_lib_mesh_.meshqueryparams.html" class="tsd-kind-icon">Mesh<wbr>Query<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_lib_mesh_.binarynode.html" class="tsd-kind-icon">Binary<wbr>Node</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshmetainfo.html" class="tsd-kind-icon">IMesh<wbr>Meta<wbr>Info</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshnav.html" class="tsd-kind-icon">IMesh<wbr>Nav</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshnavelement.html" class="tsd-kind-icon">IMesh<wbr>Nav<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_lib_mesh_.imeshnode.html" class="tsd-kind-icon">IMesh<wbr>Node</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshnodelistqueryparams.html" class="tsd-kind-icon">IMesh<wbr>Node<wbr>List<wbr>Query<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_lib_mesh_.imeshnodelistresponse.html" class="tsd-kind-icon">IMesh<wbr>Node<wbr>List<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshnoderef.html" class="tsd-kind-icon">IMesh<wbr>Node<wbr>Ref</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshobject.html" class="tsd-kind-icon">IMesh<wbr>Object</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshref.html" class="tsd-kind-icon">IMesh<wbr>Ref</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshrequest.html" class="tsd-kind-icon">IMesh<wbr>Request</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshresponse.html" class="tsd-kind-icon">IMesh<wbr>Response</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshsearchquery.html" class="tsd-kind-icon">IMesh<wbr>Search<wbr>Query</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_mesh_.imeshsearchquery.html#filter" class="tsd-kind-icon">filter</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_mesh_.imeshsearchquery.html#query" class="tsd-kind-icon">query</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_mesh_.imeshsearchquery.html#sort" class="tsd-kind-icon">sort</a>
-							</li>
-						</ul>
+						<a href="_lib_meshtemplatefilters_.ifilterregisterfunction.html" class="tsd-kind-icon">IFilter<wbr>Register<wbr>Function</a>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshtag.html" class="tsd-kind-icon">IMesh<wbr>Tag</a>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_lib_meshtemplatefilters_.html#moment_filter_key" class="tsd-kind-icon">MOMENT_<wbr>FILTER_<wbr>KEY</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshtagfamily.html" class="tsd-kind-icon">IMesh<wbr>Tag<wbr>Family</a>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_lib_meshtemplatefilters_.html#translate_filter_key" class="tsd-kind-icon">TRANSLATE_<wbr>FILTER_<wbr>KEY</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.imeshtags.html" class="tsd-kind-icon">IMesh<wbr>Tags</a>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_lib_meshtemplatefilters_.html#youtube_filter_key" class="tsd-kind-icon">YOUTUBE_<wbr>FILTER_<wbr>KEY</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_mesh_.itagfields.html" class="tsd-kind-icon">ITag<wbr>Fields</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_lib_meshtemplatefilters_.html#momentfilter" class="tsd-kind-icon">moment<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_lib_meshtemplatefilters_.html#registerfilters" class="tsd-kind-icon">register<wbr>Filters</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_lib_meshtemplatefilters_.html#youtubefilter" class="tsd-kind-icon">youtube<wbr>Filter</a>
 					</li>
 				</ul>
 			</nav>

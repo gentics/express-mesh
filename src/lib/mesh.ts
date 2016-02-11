@@ -3,6 +3,7 @@ import Q = require('q');
 import express = require('express');
 import rest = require('./meshRestClient');
 import renderer = require('./meshRenderer');
+import filters = require('./meshTemplateFilters');
 import lang = require('./meshLanguages');
 import u = require('./meshUtil');
 
@@ -14,6 +15,7 @@ import {IMeshViewHandler} from "./meshHandlerStore";
 import {IMeshErrorHandler} from "./meshHandlerStore";
 import {RenderData} from "./meshRenderer";
 import {MeshRestResponse} from "./meshRestClient";
+import {IFilterRegisterFunction} from "./meshTemplateFilters";
 
     /**
      * Wrapper for the express.Request.
@@ -466,12 +468,34 @@ import {MeshRestResponse} from "./meshRestClient";
         }
 
         /**
+         * Register default template filters.
+         * Out of the box we support registering filters with swig and handlebars. If you have a different template engine
+         * please pass a register function to register the filters with your template engine. This function will then be called
+         * for each of the mesh filters.
+         * @param engine Your template engine.
+         * @param registerfunction [optional] register function that will be called for each of the mesh filters.
+         **/
+        public registerTemplateFilters(engine : any, registerfunction? : IFilterRegisterFunction) : void {
+            filters.registerFilters(engine, registerfunction);
+        }
+
+        /**
+         * Set the express app. This function needs to be called if you did not call the server() function. In order to
+         * be able to render templates.
+         * @param app The Express app.
+         */
+        public setApp(app : express.Express) : void {
+            this.registerMeshMiddleware(app);
+            this.renderer.setApp(app);
+        }
+
+        /**
          * Initialize the Mesh server. Call this method after you added your own request handlers to the Express app,
          * as this method will attach a * handler to catch all requests that have not been handled by another handler.
          * @param app The Express app.
          */
         public server(app : express.Express) : void {
-            this.registerMeshMiddleware(app);
+            this.setApp(app);
             app.get('*', this.getRequestHandler());
         }
     }

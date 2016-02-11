@@ -71,6 +71,12 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_lib_meshtemplatefilters_.ifilterregisterfunction.html" class="tsd-kind-icon">IFilter<wbr>Register<wbr>Function</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
@@ -135,19 +141,31 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshTemplateFilters.ts#L33">lib/meshTemplateFilters.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshTemplateFilters.ts#L68">lib/meshTemplateFilters.ts:68</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Simple moment filter, that can be used to render mesh dates/timestamps with a formatstring.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>input: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>unix timestamp that should be rendered</p>
+									</div>
 								</li>
 								<li>
 									<h5>format: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>format string (check momentjs website)</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>formated date.</p>
 						</li>
 					</ul>
 				</section>
@@ -155,15 +173,38 @@
 					<a name="registerfilters" class="tsd-anchor"></a>
 					<h3>register<wbr>Filters</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">register<wbr>Filters<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">register<wbr>Filters<span class="tsd-signature-symbol">(</span>engine<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, registerfunction<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_lib_meshtemplatefilters_.ifilterregisterfunction.html" class="tsd-signature-type">IFilterRegisterFunction</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshTemplateFilters.ts#L15">lib/meshTemplateFilters.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshTemplateFilters.ts#L31">lib/meshTemplateFilters.ts:31</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Register default template filters.
+										Out of the box we support registering filters with swig and handlebars. If you have a different template engine
+										please pass a register function to register the filters with your template engine. This function will then be called
+									for each of the mesh filters.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>engine: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Your template engine.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> registerfunction: <a href="../interfaces/_lib_meshtemplatefilters_.ifilterregisterfunction.html" class="tsd-signature-type">IFilterRegisterFunction</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>register function that will be called for each of the mesh filters.</p>
+									</div>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -178,9 +219,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshTemplateFilters.ts#L23">lib/meshTemplateFilters.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshTemplateFilters.ts#L52">lib/meshTemplateFilters.ts:52</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Simple youtube filter, that extracts the video id out of a youtube link.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -230,6 +276,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_lib_meshtemplatefilters_.ifilterregisterfunction.html" class="tsd-kind-icon">IFilter<wbr>Register<wbr>Function</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_lib_meshtemplatefilters_.html#moment_filter_key" class="tsd-kind-icon">MOMENT_<wbr>FILTER_<wbr>KEY</a>
 					</li>

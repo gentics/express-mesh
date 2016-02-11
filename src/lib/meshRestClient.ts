@@ -58,6 +58,12 @@ export class MeshAuth {
         }
     }
 
+    /**
+     * Generate basic auth header from username and password.
+     * @param username Username
+     * @param password Password
+     * @returns {string} Header string.
+     */
     private getBasicAuthHeader(username : string, password : string) : string {
         return 'Basic ' + new Buffer(username + ':' + password).toString('base64');
     }
@@ -73,6 +79,11 @@ export class MeshRequestOptions {
     params : IMeshNodeListQueryParams;
     auth : MeshAuth;
     logging : LoggingConfig;
+
+    /**
+     * Initialize request options and prefill it with the authentication object.
+     * @param request MeshRequest
+     */
     constructor(request : IMeshRequest) {
         this.auth = new MeshAuth(request);
         this.logging = request.meshConfig.logging;
@@ -91,6 +102,13 @@ export class MeshRestClient {
 
     private publicMeshCookieUserStore : any = {};
 
+    /**
+     *
+     * @param req
+     * @param path
+     * @param maxDepth
+     * @returns {Q.Promise<MeshRestResponse<IMeshNav>>}
+     */
     public getNavigationByPath(req : IMeshRequest, path : string, maxDepth? : number) : Q.Promise<MeshRestResponse<IMeshNav>> {
         var url = req.meshConfig.meshUrl + req.meshConfig.meshBase + req.meshConfig.meshProject + req.meshConfig.meshNavroot + path,
             params = new MeshQueryParams();

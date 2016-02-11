@@ -4,10 +4,11 @@ import Q = require('q');
 import meshClient = require('./meshRestClient');
 import path = require('path');
 import u = require('./meshUtil');
+import express = require('express');
 import handler = require('./meshHandlerStore');
 import lang = require('./meshLanguages');
 import filter = require('./meshTemplateFilters');
-import swig  = require('swig');
+
 
 import {IMeshRequest} from "./mesh";
 import {IMeshNode} from "./mesh";
@@ -26,6 +27,7 @@ export class RenderInformation {
     public languageURLs : { [key:string]:string; } = {};
     public username : string;
     public loggedin : boolean;
+
 
     /**
      * Constructor that initializes the render information.
@@ -75,12 +77,13 @@ export class MeshRenderer {
     private errorHandlerStore : handler.ErrorHandlerStore;
     private viewHandlerStore : handler.ViewHandlerStore;
 
+    private app : express.Express;
+
     /**
      * Initialize the renderer.
      * @param viewDir Directory that contains the templates.
      */
     constructor(private viewDir : string){
-        filter.registerFilters();
         this.schemaHandlerStore = new handler.SchemaHandlerStore();
         this.errorHandlerStore = new handler.ErrorHandlerStore();
         this.viewHandlerStore = new handler.ViewHandlerStore();
@@ -205,7 +208,12 @@ export class MeshRenderer {
         if (u.isDefined(key)) {
             this.schemaHandlerStore.workSchemaHandlers(key, node).then((node : IMeshNode<T>) => {
                 this.viewExists(key).then(() => {
-                    deferred.resolve(this.renderTemplate(key, node));
+                    this.renderTemplate(key, node).then((html : string) => {
+                        deferred.resolve(html);
+                    }).catch((err) => {
+                        console.error('Error while rendering template for {' + key + '}. Using blank.',err);
+                        deferred.resolve('');
+                    })
                 }).catch(() => {
                     console.warn('Template for schema {' + key + '} not found. Using blank.');
                     deferred.resolve('')
@@ -227,9 +235,20 @@ export class MeshRenderer {
         return key;
     }
 
-    private renderTemplate(name : string, data : any) : string {
-        var templatepath = path.join(this.viewDir, name + MeshRenderer.TEMPLATE_EXTENSION);
-        return swig.renderFile(templatepath, data);
+    private renderTemplate(name : string, data : any) : Q.Promise<string> {
+        var deferred = Q.defer<string>();
+            if (!u.isDefined(this.app)) {
+                deferred.reject("App not defined. Call setApp with the Express app.");
+            } else {
+                this.app.render(name, data, (err : Error, html : string) => {
+                   if (u.isDefined(err)) {
+                       deferred.reject(err);
+                   } else {
+                       deferred.resolve(html);
+                   }
+                });
+            }
+        return deferred.promise;
     }
 
     public getRenderData<T>(node : IMeshNode<T>, req : IMeshRequest) : RenderData {
@@ -238,5 +257,13 @@ export class MeshRenderer {
         data.node = node;
         data.renderInformation = new RenderInformation(req, node);
         return data;
+    }
+
+    /**
+     * Set the Express app to the renderer.
+     * @param app Express app.
+     */
+    public setApp(app : express.Express) : void {
+        this.app = app;
     }
 }

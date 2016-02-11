@@ -6,6 +6,7 @@ import { IMeshViewHandler } from "./meshHandlerStore";
 import { IMeshErrorHandler } from "./meshHandlerStore";
 import { RenderData } from "./meshRenderer";
 import { MeshRestResponse } from "./meshRestClient";
+import { IFilterRegisterFunction } from "./meshTemplateFilters";
 /**
  * Wrapper for the express.Request.
  * We can use them to add properties to the request.
@@ -345,6 +346,21 @@ export declare class Mesh {
      * @param app The Express app.
      */
     private registerMeshMiddleware(app);
+    /**
+     * Register default template filters.
+     * Out of the box we support registering filters with swig and handlebars. If you have a different template engine
+     * please pass a register function to register the filters with your template engine. This function will then be called
+     * for each of the mesh filters.
+     * @param engine Your template engine.
+     * @param registerfunction [optional] register function that will be called for each of the mesh filters.
+     **/
+    registerTemplateFilters(engine: any, registerfunction?: IFilterRegisterFunction): void;
+    /**
+     * Set the express app. This function needs to be called if you did not call the server() function. In order to
+     * be able to render templates.
+     * @param app The Express app.
+     */
+    setApp(app: express.Express): void;
     /**
      * Initialize the Mesh server. Call this method after you added your own request handlers to the Express app,
      * as this method will attach a * handler to catch all requests that have not been handled by another handler.

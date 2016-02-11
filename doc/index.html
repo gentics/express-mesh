@@ -78,7 +78,7 @@
 					<li>Completely typed API with TypeScript</li>
 				</ul>
 				<h2 id="how-to-install">How to install</h2>
-				<h5 id="1-install-gulp">1. Install gulp</h5>
+				<h5 id="1-install-express-mesh">1. Install express-mesh</h5>
 				<pre><code class="lang-shell">npm install -save express-mesh
 </code></pre>
 				<h2 id="basic-usage">Basic Usage</h2>
@@ -89,13 +89,13 @@
 <span class="hljs-keyword">var</span> cookieParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cookie-parser'</span>);
 <span class="hljs-keyword">var</span> bodyParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'body-parser'</span>);
 <span class="hljs-keyword">var</span> session = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express-session'</span>);
-<span class="hljs-keyword">var</span> swig = <span class="hljs-built_in">require</span>(<span class="hljs-string">"swig"</span>);
+<span class="hljs-keyword">var</span> swig = <span class="hljs-built_in">require</span>(<span class="hljs-string">'swig'</span>);
 <span class="hljs-keyword">var</span> expressCompression = <span class="hljs-built_in">require</span>(<span class="hljs-string">'compression'</span>);
 <span class="hljs-keyword">var</span> cons = <span class="hljs-built_in">require</span>(<span class="hljs-string">'consolidate'</span>);
 <span class="hljs-keyword">var</span> mesh = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express-mesh'</span>);
 
-<span class="hljs-keyword">var</span> port    = process.env.PORT || <span class="hljs-number">8089</span>,
-    app : express.Express = express(),
+<span class="hljs-keyword">var</span> port  = process.env.PORT || <span class="hljs-number">8089</span>,
+    app  = express(),
     server = http.createServer(app),
     viewDir = __dirname + <span class="hljs-string">'/views'</span>,
     langDir = __dirname + <span class="hljs-string">'/languages'</span>,

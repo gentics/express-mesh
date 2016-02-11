@@ -4,8 +4,8 @@ import Q = require('q');
 import fs = require('fs');
 import path = require('path');
 import URL = require('url');
-import swig  = require('swig');
 import lang  = require('./meshLanguages');
+import u = require('./meshUtil');
 import moment  = require('moment');
 
 var TRANSLATE_FILTER_KEY : string = 'translate';
@@ -13,22 +13,37 @@ var YOUTUBE_FILTER_KEY : string = 'youtube';
 var MOMENT_FILTER_KEY : string = 'moment';
 
 /**
- * Register default template filters.
- **/
-export function registerFilters() : void {
-    // register swig filter to be able to translate in templates
-    swig.setFilter(TRANSLATE_FILTER_KEY, lang.translateFilter);
-    swig.setFilter(YOUTUBE_FILTER_KEY, youtubeFilter);
-    swig.setFilter(MOMENT_FILTER_KEY, momentFilter);
+ * Interface for the FilterRegisterFunction. You can pass such a function to register the mesh filters to your
+ * template engine.
+ */
+export interface IFilterRegisterFunction {
+    (engine : any, key : string, filterfunction : Function) : void;
 }
 
 /**
- * Register a template filter.
- * @param filterkey Key for the filter that should be registered.
- * @param filter Filter that should be registered.
+ * Register default template filters.
+ * Out of the box we support registering filters with swig and handlebars. If you have a different template engine
+ * please pass a register function to register the filters with your template engine. This function will then be called
+ * for each of the mesh filters.
+ * @param engine Your template engine.
+ * @param registerfunction [optional] register function that will be called for each of the mesh filters.
  **/
-export function registerFilter(filterkey : string, filter : Function) : void {
-    swig.setFilter(filterkey, filter);
+export function registerFilters(engine : any, registerfunction? : IFilterRegisterFunction) : void {
+    if (u.isDefined(engine) && u.isFunction(engine.setFilter)) {
+        engine.setFilter(TRANSLATE_FILTER_KEY, lang.translateFilter);
+        engine.setFilter(YOUTUBE_FILTER_KEY, youtubeFilter);
+        engine.setFilter(MOMENT_FILTER_KEY, momentFilter);
+    } else if (u.isDefined(engine) && u.isFunction(engine.registerHelper)) {
+        engine.registerHelper(TRANSLATE_FILTER_KEY, lang.translateFilter);
+        engine.registerHelper(YOUTUBE_FILTER_KEY, youtubeFilter);
+        engine.registerHelper(MOMENT_FILTER_KEY, momentFilter);
+    } else if (u.isDefined(registerfunction) && u.isFunction(registerfunction)) {
+        registerfunction(engine, TRANSLATE_FILTER_KEY, lang.translateFilter);
+        registerfunction(engine, YOUTUBE_FILTER_KEY, youtubeFilter);
+        registerfunction(engine, MOMENT_FILTER_KEY, momentFilter);
+    } else {
+        throw 'Registering filters failed. Either use a supported engine, or pass a custom register function.';
+    }
 }
 
 /**

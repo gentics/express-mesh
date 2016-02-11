@@ -70,6 +70,14 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>View handler store. This store keeps the registered view handlers.
+						Go through the Mesh API to register a view handler.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -107,7 +115,7 @@
 					<div class="tsd-signature tsd-kind-icon">handlers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_lib_meshhandlerstore_.imeshviewhandler.html" class="tsd-signature-type">IMeshViewHandler</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshHandlerStore.ts#L68">lib/meshHandlerStore.ts:68</a></li>
+							<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshHandlerStore.ts#L107">lib/meshHandlerStore.ts:107</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -124,13 +132,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshHandlerStore.ts#L70">lib/meshHandlerStore.ts:70</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshHandlerStore.ts#L113">lib/meshHandlerStore.ts:113</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Register a view handler.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>handler: <a href="../interfaces/_lib_meshhandlerstore_.imeshviewhandler.html" class="tsd-signature-type">IMeshViewHandler</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The handler that should be registered.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -147,13 +163,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshHandlerStore.ts#L77">lib/meshHandlerStore.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshHandlerStore.ts#L124">lib/meshHandlerStore.ts:124</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Unregister a view handler.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>handler: <a href="../interfaces/_lib_meshhandlerstore_.imeshviewhandler.html" class="tsd-signature-type">IMeshViewHandler</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The handler that should be unregistered.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -170,22 +194,38 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshHandlerStore.ts#L85">lib/meshHandlerStore.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/meshHandlerStore.ts#L140">lib/meshHandlerStore.ts:140</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Execute all view handlers.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>renderdata: <a href="_lib_meshrenderer_.renderdata.html" class="tsd-signature-type">RenderData</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Renderdata, that should be processed by the view handlers.</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> req: <a href="../interfaces/_lib_mesh_.imeshrequest.html" class="tsd-signature-type">IMeshRequest</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The MeshRequest.</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> res: <a href="../interfaces/_lib_mesh_.imeshresponse.html" class="tsd-signature-type">IMeshResponse</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The MeshResponse</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_meshrenderer_.renderdata.html" class="tsd-signature-type">RenderData</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise, that will be fulfilled, once all the view handlers have been executed
+							and will be rejected if executing a view handler fails.</p>
 						</li>
 					</ul>
 				</section>

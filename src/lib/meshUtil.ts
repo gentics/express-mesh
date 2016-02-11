@@ -31,6 +31,15 @@ export function isDefined(obj : any) : boolean {
 }
 
 /**
+ * Short hand to check if a variable is a function.
+ * @param obj Variable to check
+ * @returns {boolean} true if it is a function, false otherwise.
+ */
+export function isFunction(obj : any) : boolean {
+    return typeof obj === 'function';
+}
+
+/**
  * Get the path from an URL.
  * @param url URL to convert to a path.
  * @returns {string} The path part of a URL.

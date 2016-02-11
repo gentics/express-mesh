@@ -99,7 +99,7 @@
     server = http.createServer(app),
     viewDir = __dirname + <span class="hljs-string">'/views'</span>,
     langDir = __dirname + <span class="hljs-string">'/languages'</span>,
-    Mesh = <span class="hljs-keyword">new</span> mesh.Mesh(<span class="hljs-keyword">new</span> mesh.MeshConfig(<span class="hljs-string">'Demo'</span>, viewDir, langDir));
+    Mesh = <span class="hljs-keyword">new</span> mesh.Mesh(app,<span class="hljs-keyword">new</span> mesh.MeshConfig(<span class="hljs-string">'Demo'</span>, viewDir, langDir));
 
 app.set(<span class="hljs-string">'views'</span>, viewDir);
 app.engine(<span class="hljs-string">'html'</span>, cons.swig);

@@ -37,17 +37,18 @@ export declare class RenderData {
  * The MeshRenderer is responsible for rendering templates.
  */
 export declare class MeshRenderer {
+    private app;
     private viewDir;
     static TEMPLATE_EXTENSION: string;
     private schemaHandlerStore;
     private errorHandlerStore;
     private viewHandlerStore;
-    private app;
     /**
      * Initialize the renderer.
+     * @param app Express app.
      * @param viewDir Directory that contains the templates.
      */
-    constructor(viewDir: string);
+    constructor(app: express.Express, viewDir: string);
     registerSchemaHandler<T>(schema: string, handler: IMeshSchemaHandler<T>): void;
     registerErrorHandler(status: number, handler: IMeshErrorHandler): void;
     registerViewRenderHandler(handler: IMeshViewHandler): void;
@@ -61,9 +62,4 @@ export declare class MeshRenderer {
     private getSchemaKey<T>(node);
     private renderTemplate(name, data);
     getRenderData<T>(node: IMeshNode<T>, req: IMeshRequest): RenderData;
-    /**
-     * Set the Express app to the renderer.
-     * @param app Express app.
-     */
-    setApp(app: express.Express): void;
 }

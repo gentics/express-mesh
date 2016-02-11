@@ -230,11 +230,13 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
 
         /**
          * Constructor for the main frontend API entry point.
+         * @param app Express app.
          * @param config Configuration for the mesh server.
          */
-        constructor(private config : MeshConfig) {
+        constructor(private app : express.Express, private config : MeshConfig) {
             this.meshClient = new MeshRestClient();
-            this.renderer = new MeshRenderer(this.config.viewDirectory);
+            this.renderer = new MeshRenderer(this.app, this.config.viewDirectory);
+            this.registerMeshMiddleware(app);
         }
 
         /**
@@ -480,22 +482,11 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
         }
 
         /**
-         * Set the express app. This function needs to be called if you did not call the server() function. In order to
-         * be able to render templates.
-         * @param app The Express app.
-         */
-        public setApp(app : express.Express) : void {
-            this.registerMeshMiddleware(app);
-            this.renderer.setApp(app);
-        }
-
-        /**
          * Initialize the Mesh server. Call this method after you added your own request handlers to the Express app,
          * as this method will attach a * handler to catch all requests that have not been handled by another handler.
          * @param app The Express app.
          */
         public server(app : express.Express) : void {
-            this.setApp(app);
             app.get('*', this.getRequestHandler());
         }
     }

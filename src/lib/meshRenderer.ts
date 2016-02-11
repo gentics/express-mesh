@@ -77,13 +77,12 @@ export class MeshRenderer {
     private errorHandlerStore : handler.ErrorHandlerStore;
     private viewHandlerStore : handler.ViewHandlerStore;
 
-    private app : express.Express;
-
     /**
      * Initialize the renderer.
+     * @param app Express app.
      * @param viewDir Directory that contains the templates.
      */
-    constructor(private viewDir : string){
+    constructor(private app : express.Express, private viewDir : string){
         this.schemaHandlerStore = new handler.SchemaHandlerStore();
         this.errorHandlerStore = new handler.ErrorHandlerStore();
         this.viewHandlerStore = new handler.ViewHandlerStore();
@@ -257,13 +256,5 @@ export class MeshRenderer {
         data.node = node;
         data.renderInformation = new RenderInformation(req, node);
         return data;
-    }
-
-    /**
-     * Set the Express app to the renderer.
-     * @param app Express app.
-     */
-    public setApp(app : express.Express) : void {
-        this.app = app;
     }
 }

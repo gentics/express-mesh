@@ -197,14 +197,16 @@ export interface BinaryNode<T> extends IMeshNode<T> {
  *  Mesh.server(app);
  */
 export declare class Mesh {
+    private app;
     private config;
     private meshClient;
     private renderer;
     /**
      * Constructor for the main frontend API entry point.
+     * @param app Express app.
      * @param config Configuration for the mesh server.
      */
-    constructor(config: MeshConfig);
+    constructor(app: express.Express, config: MeshConfig);
     /**
      * Register a custom schema handler.
      * A registered schema handler will be executed before a node with the schema it has been
@@ -355,12 +357,6 @@ export declare class Mesh {
      * @param registerfunction [optional] register function that will be called for each of the mesh filters.
      **/
     registerTemplateFilters(engine: any, registerfunction?: IFilterRegisterFunction): void;
-    /**
-     * Set the express app. This function needs to be called if you did not call the server() function. In order to
-     * be able to render templates.
-     * @param app The Express app.
-     */
-    setApp(app: express.Express): void;
     /**
      * Initialize the Mesh server. Call this method after you added your own request handlers to the Express app,
      * as this method will attach a * handler to catch all requests that have not been handled by another handler.

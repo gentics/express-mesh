@@ -22,31 +22,69 @@ export class LoggingConfig {
 }
 
 /**
+ * Configration base. Can be used to create a mesh configuration.
+ */
+export interface IMeshConfigBase {
+    languageDirectory? : string;
+    viewDirectory? : string;
+    backendUrl? : string;
+    base? : string;
+    webroot? : string;
+    navroot? : string;
+    project? : string;
+    auth? : string;
+    checkPublished? : boolean;
+    publicUser? : MeshAuthUser;
+    index? : string;
+    defaultErrorView? : string;
+    defaultView? : string;
+    languages? : Array<string>;
+    development? : boolean;
+    logging? : LoggingConfig;
+}
+
+/**
  * The configuration class for the Mesh API
  */
 export class MeshConfig {
+
     /**
-     * Constructor for the default configuration.
+     * Create a mesh config object from an object containing the configuration.
+     * @param conf Configuration Object.
+     */
+    constructor(conf : IMeshConfigBase) {
+        for (var key in conf) {
+            this[key] = conf[key];
+        }
+    }
+
+    /**
+     * Factory funciton to create a simple configuration.
      * @param project name of the project.
      * @param viewDirectory directory where the templates are stored.
      * @param languageDirectory directory where translation files are stored.
      */
-    constructor(project : string, viewDirectory : string, languageDirectory : string) {
-        this.meshProject = project;
-        this.viewDirectory = viewDirectory;
-        this.languageDirectory = languageDirectory;
+    public static createSimpleConfiguration(project : string,
+                                            viewDirectory : string = 'views',
+                                            languageDirectory : string = 'languages') : MeshConfig {
+        return new MeshConfig({
+            project : project,
+            viewDirectory : viewDirectory,
+            languageDirectory : languageDirectory
+        });
     }
+
     public languageDirectory : string;
     public viewDirectory : string = 'public';
-    public meshUrl : string =        'http://localhost:8080';
-    public meshBase : string =       '/api/v1/';
-    public meshWebroot : string =    '/webroot';
-    public meshNavroot : string =    '/navroot';
-    public meshProject : string =    'Demo';
-    public meshAuth : string =       'basic';
-    public meshCheckPublished : boolean = true;
-    public meshPublicUser : MeshAuthUser = new MeshAuthUser();
-    public meshIndex : string =      '/index.html';
+    public backendUrl : string =        'http://localhost:8080';
+    public base : string =       '/api/v1/';
+    public webroot : string =    '/webroot';
+    public navroot : string =    '/navroot';
+    public project : string =    'Demo';
+    public auth : string =       'basic';
+    public checkPublished : boolean = true;
+    public publicUser : MeshAuthUser = new MeshAuthUser();
+    public index : string =      '/index.html';
     public defaultErrorView : string  = 'error';
     public defaultView : string  = 'default';
     public languages : Array<string>  = ['de', 'en'];

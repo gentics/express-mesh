@@ -18,27 +18,53 @@ export declare class LoggingConfig {
     renderdata: boolean;
 }
 /**
+ * Configration base. Can be used to create a mesh configuration.
+ */
+export interface IMeshConfigBase {
+    languageDirectory?: string;
+    viewDirectory?: string;
+    backendUrl?: string;
+    base?: string;
+    webroot?: string;
+    navroot?: string;
+    project?: string;
+    auth?: string;
+    checkPublished?: boolean;
+    publicUser?: MeshAuthUser;
+    index?: string;
+    defaultErrorView?: string;
+    defaultView?: string;
+    languages?: Array<string>;
+    development?: boolean;
+    logging?: LoggingConfig;
+}
+/**
  * The configuration class for the Mesh API
  */
 export declare class MeshConfig {
     /**
-     * Constructor for the default configuration.
+     * Create a mesh config object from an object containing the configuration.
+     * @param conf Configuration Object.
+     */
+    constructor(conf: IMeshConfigBase);
+    /**
+     * Factory funciton to create a simple configuration.
      * @param project name of the project.
      * @param viewDirectory directory where the templates are stored.
      * @param languageDirectory directory where translation files are stored.
      */
-    constructor(project: string, viewDirectory: string, languageDirectory: string);
+    static createSimpleConfiguration(project: string, viewDirectory?: string, languageDirectory?: string): MeshConfig;
     languageDirectory: string;
     viewDirectory: string;
-    meshUrl: string;
-    meshBase: string;
-    meshWebroot: string;
-    meshNavroot: string;
-    meshProject: string;
-    meshAuth: string;
-    meshCheckPublished: boolean;
-    meshPublicUser: MeshAuthUser;
-    meshIndex: string;
+    backendUrl: string;
+    base: string;
+    webroot: string;
+    navroot: string;
+    project: string;
+    auth: string;
+    checkPublished: boolean;
+    publicUser: MeshAuthUser;
+    index: string;
     defaultErrorView: string;
     defaultView: string;
     languages: Array<string>;

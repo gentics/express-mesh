@@ -54,7 +54,7 @@ export class MeshAuth {
             this.header = this.getBasicAuthHeader(request.session[MeshAuth.MESH_USER_SESSION_KEY],
                 request.session[MeshAuth.MESH_PASSWORD_SESSION_KEY]);
         } else {
-            this.header = this.getBasicAuthHeader(request.meshConfig.meshPublicUser.username, request.meshConfig.meshPublicUser.password);
+            this.header = this.getBasicAuthHeader(request.meshConfig.publicUser.username, request.meshConfig.publicUser.password);
         }
     }
 
@@ -110,7 +110,7 @@ export class MeshRestClient {
      * @returns {Q.Promise<MeshRestResponse<IMeshNav>>}
      */
     public getNavigationByPath(req : IMeshRequest, path : string, maxDepth? : number) : Q.Promise<MeshRestResponse<IMeshNav>> {
-        var url = req.meshConfig.meshUrl + req.meshConfig.meshBase + req.meshConfig.meshProject + req.meshConfig.meshNavroot + path,
+        var url = req.meshConfig.backendUrl + req.meshConfig.base + req.meshConfig.project + req.meshConfig.navroot + path,
             params = new MeshQueryParams();
         params.maxDepth = maxDepth ? maxDepth : 10;
         return this.meshSimpleGET(req, url, params).then((response : MeshRestResponse<IMeshNav>)=>{
@@ -119,7 +119,7 @@ export class MeshRestClient {
     }
 
     public getNavigationByUUID(req : IMeshRequest, uuid : string, maxDepth? : number) : Q.Promise<MeshRestResponse<IMeshNav>> {
-        var url = req.meshConfig.meshUrl + req.meshConfig.meshBase + req.meshConfig.meshProject + MeshRestClient.NODES_ENDPOINT + uuid + MeshRestClient.NAVIGATION_ENDPOINT,
+        var url = req.meshConfig.backendUrl + req.meshConfig.base + req.meshConfig.project + MeshRestClient.NODES_ENDPOINT + uuid + MeshRestClient.NAVIGATION_ENDPOINT,
             params = new MeshQueryParams();
             params.maxDepth = maxDepth ? maxDepth : 10;
         return this.meshSimpleGET(req,url, params).then((response : MeshRestResponse<IMeshNav>)=>{
@@ -130,11 +130,11 @@ export class MeshRestClient {
     public getWebrootNode<T>(req : IMeshRequest, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNode<T>>> {
         var url = req.originalUrl;
         if (typeof url === 'undefined' || u.getPath(url) === '/') {
-            url = req.meshConfig.meshIndex;
+            url = req.meshConfig.index;
         }
-        url = req.meshConfig.meshUrl + req.meshConfig.meshBase + req.meshConfig.meshProject + req.meshConfig.meshWebroot + url;
+        url = req.meshConfig.backendUrl + req.meshConfig.base + req.meshConfig.project + req.meshConfig.webroot + url;
         return this.meshSimpleGET<IMeshNode<T>>(req, url, params).then((response : MeshRestResponse<IMeshNode<T>>)=>{
-            if (req.meshConfig.meshCheckPublished && !response.isBinary && !response.data.published) {
+            if (req.meshConfig.checkPublished && !response.isBinary && !response.data.published) {
                 response.status = 404;
             }
             return response;
@@ -142,9 +142,9 @@ export class MeshRestClient {
     }
 
     public getMeshNode<T>(req : IMeshRequest, uuid : string, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNode<T>>> {
-        var url = req.meshConfig.meshUrl + req.meshConfig.meshBase + req.meshConfig.meshProject + MeshRestClient.NODES_ENDPOINT + uuid;
+        var url = req.meshConfig.backendUrl + req.meshConfig.base + req.meshConfig.project + MeshRestClient.NODES_ENDPOINT + uuid;
         return this.meshSimpleGET<IMeshNode<T>>(req, url, params).then((response : MeshRestResponse<IMeshNode<T>>)=>{
-            if (req.meshConfig.meshCheckPublished && !response.isBinary && !response.data.published) {
+            if (req.meshConfig.checkPublished && !response.isBinary && !response.data.published) {
                 response.status = 404;
             }
             return response;
@@ -162,7 +162,7 @@ export class MeshRestClient {
     public meshSearch<T>(req : IMeshRequest, query : IMeshSearchQuery, params? : IMeshNodeListQueryParams) : Q.Promise<MeshRestResponse<IMeshNodeListResponse<T>>> {
         var opts = new MeshRequestOptions(req),
             languages = lang.getLanguageArray(req);
-        opts.url = opts.url = req.meshConfig.meshUrl + req.meshConfig.meshBase + 'search/nodes';
+        opts.url = opts.url = req.meshConfig.backendUrl + req.meshConfig.base + 'search/nodes';
         opts.params = params;
         opts.params.resolveLinks = 'short';
         if (u.isDefined(languages)) {
@@ -172,18 +172,18 @@ export class MeshRestClient {
     }
 
     public getTagFamilies(req : IMeshRequest, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshTagFamily>>> {
-        var url = req.meshConfig.meshUrl + req.meshConfig.meshBase + req.meshConfig.meshProject + MeshRestClient.TAG_FAMILIES_ENDPOINT;
+        var url = req.meshConfig.backendUrl + req.meshConfig.base + req.meshConfig.project + MeshRestClient.TAG_FAMILIES_ENDPOINT;
         return this.meshSimpleGET<IMeshNodeListResponse<IMeshTagFamily>>(req, url, params);
     }
 
     public getTagsOfTagFamily(req : IMeshRequest, uuid : string, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshTag>>> {
-        var url = req.meshConfig.meshUrl + req.meshConfig.meshBase + req.meshConfig.meshProject + MeshRestClient.TAG_FAMILIES_ENDPOINT + '/' + uuid + '/tags';
+        var url = req.meshConfig.backendUrl + req.meshConfig.base + req.meshConfig.project + MeshRestClient.TAG_FAMILIES_ENDPOINT + '/' + uuid + '/tags';
         return this.meshSimpleGET<IMeshNodeListResponse<IMeshTag>>(req, url, params);
     }
 
     public login(req : IMeshRequest, username : string, password : string) : Q.Promise<boolean> {
         var opts = new MeshRequestOptions(req);
-        opts.url = opts.url = req.meshConfig.meshUrl + req.meshConfig.meshBase + 'auth/login';
+        opts.url = opts.url = req.meshConfig.backendUrl + req.meshConfig.base + 'auth/login';
         return this.meshPOST(opts, {
             "username" : username,
             "password" : password
@@ -200,7 +200,7 @@ export class MeshRestClient {
 
     public logout(req : IMeshRequest) : Q.Promise<boolean> {
         var opts = new MeshRequestOptions(req);
-        opts.url = opts.url = req.meshConfig.meshUrl + req.meshConfig.meshBase + 'auth/logout';
+        opts.url = opts.url = req.meshConfig.backendUrl + req.meshConfig.base + 'auth/logout';
         return this.makeMeshRequest(opts).then((response) => {
             return true;
         }).catch((err) => {
@@ -272,6 +272,9 @@ export class MeshRestClient {
         var starttime = Date.now(),
             req = http.request(options, (res) => {
             var data = '';
+            if (res.statusCode === 401 || res.statusCode === 403) {
+                console.error(res.statusCode, res.statusMessage, 'Check your mesh user.');
+            }
             if (u.isDefined(res.headers) && u.isDefined(res.headers['set-cookie'])) {
                 res.headers['set-cookie'].forEach((cookie) => {
                     var meshCookie;

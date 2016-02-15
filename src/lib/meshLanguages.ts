@@ -22,7 +22,7 @@ var initialized : boolean = false;
  */
 export function readLanguageFiles(config : MeshConfig) : void {
     var langFilePath = config.languageDirectory;
-    if (!initialized || config.development) {
+    if (u.isDefined(langFilePath) && langFilePath !== '' && (!initialized || config.development)) {
         langCache = {};
         config.languages.forEach((lang : string) => {
             var parsedLang;

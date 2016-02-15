@@ -48,8 +48,8 @@ export class RenderInformation {
             });
         }
         this.username = req.session[meshClient.MeshAuth.MESH_USER_SESSION_KEY] ?
-            req.session[meshClient.MeshAuth.MESH_USER_SESSION_KEY] : req.meshConfig.meshPublicUser.username;
-        this.loggedin = this.username !== req.meshConfig.meshPublicUser.username;
+            req.session[meshClient.MeshAuth.MESH_USER_SESSION_KEY] : req.meshConfig.publicUser.username;
+        this.loggedin = this.username !== req.meshConfig.publicUser.username;
     }
 }
 

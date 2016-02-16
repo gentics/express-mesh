@@ -120,6 +120,10 @@ app.use(express.static(path.join(__dirname, <span class="hljs-string">'public'</
 Mesh.registerTemplateFilters(swig);
 <span class="hljs-comment">// initialize the mesh frontend</span>
 Mesh.server(app);
+
+server.listen(port, () =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Express server listening on port "</span> + port);
+});
 </code></pre>
 			</div>
 		</div>

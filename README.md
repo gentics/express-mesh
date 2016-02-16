@@ -63,4 +63,8 @@ Mesh.registerTemplateFilters(swig);
 // initialize the mesh frontend
 Mesh.server(app);
 
+server.listen(port, () => {
+    console.log("Express server listening on port " + port);
+});
+
 ```

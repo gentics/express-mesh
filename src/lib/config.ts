@@ -66,7 +66,7 @@ export class MeshConfig {
      */
     public static createSimpleConfiguration(project : string,
                                             viewDirectory : string = 'views',
-                                            languageDirectory : string = 'languages') : MeshConfig {
+                                            languageDirectory? : string) : MeshConfig {
         return new MeshConfig({
             project : project,
             viewDirectory : viewDirectory,

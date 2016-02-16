@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var ts = require('gulp-typescript');
-var merge = require('merge2');
 var clean = require('gulp-clean');
 var rimraf = require('gulp-rimraf');
 var typedoc = require("gulp-typedoc");

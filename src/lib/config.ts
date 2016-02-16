@@ -82,7 +82,7 @@ export class MeshConfig {
     public navroot : string =    '/navroot';
     public project : string =    'demo';
     public auth : string =       'basic';
-    public checkPublished : boolean = true;
+    public checkPublished : boolean = false;
     public publicUser : MeshAuthUser = new MeshAuthUser();
     public index : string =      '/index.html';
     public defaultErrorView : string  = 'error';

@@ -40,8 +40,7 @@ var port  = process.env.PORT || 8089,
     app  = express(),
     server = http.createServer(app),
     viewDir = __dirname + '/views',
-    langDir = __dirname + '/languages',
-    Mesh = new mesh.Mesh(app,mesh.MeshConfig.createSimpleConfiguration('Demo', viewDir, langDir));
+    Mesh = new mesh.Mesh(app,mesh.MeshConfig.createSimpleConfiguration('demo'));
 
 app.set('views', viewDir);
 app.engine('html', cons.swig);

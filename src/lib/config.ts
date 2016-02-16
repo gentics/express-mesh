@@ -5,8 +5,8 @@
  * This user will be used per default for all requests to Mesh.
  */
 export class MeshAuthUser {
-    public username : string = 'public';
-    public password : string = 'public';
+    public username : string = 'admin';
+    public password : string = 'admin';
 }
 
 /**
@@ -80,7 +80,7 @@ export class MeshConfig {
     public base : string =       '/api/v1/';
     public webroot : string =    '/webroot';
     public navroot : string =    '/navroot';
-    public project : string =    'Demo';
+    public project : string =    'demo';
     public auth : string =       'basic';
     public checkPublished : boolean = true;
     public publicUser : MeshAuthUser = new MeshAuthUser();

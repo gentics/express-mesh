@@ -7,6 +7,7 @@ import filters = require('./meshTemplateFilters');
 import lang = require('./meshLanguages');
 import u = require('./meshUtil');
 
+import Session = Express.Session;
 import {MeshConfig} from "./config";
 import {MeshRenderer} from "./meshRenderer";
 import {MeshRestClient} from "./meshRestClient";
@@ -463,6 +464,10 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
                 }
                 if (u.isDefined(req.query.lang)) {
                     lang.setActiveLanguage(req, req.query.lang);
+                }
+                // polifill for express-session
+                if (!u.isDefined(req.session)) {
+                    req.session = <Session>{};
                 }
                 lang.readLanguageFiles(this.config);
                 next();

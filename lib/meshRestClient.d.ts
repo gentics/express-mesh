@@ -90,7 +90,8 @@ export declare class MeshRestClient {
     getTagsOfTagFamily(req: IMeshRequest, uuid: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshTag>>>;
     login(req: IMeshRequest, username: string, password: string): Q.Promise<boolean>;
     logout(req: IMeshRequest): Q.Promise<boolean>;
-    private meshSimpleGET<T>(req, url, params?);
+    meshSimpleGET<T>(req: IMeshRequest, url: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<T>>;
+    meshSimpleRequest<T>(method: string, req: IMeshRequest, url: string, params?: MeshQueryParams, data?: any): Q.Promise<MeshRestResponse<T>>;
     meshPOST(requestOptions: MeshRequestOptions, data?: any): Q.Promise<MeshRestResponse<any>>;
     /**
      * Convert a queryParams object into a URL-encoded string.

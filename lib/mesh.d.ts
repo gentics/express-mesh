@@ -337,6 +337,26 @@ export declare class Mesh {
      */
     getTagsOfTagFamily(req: IMeshRequest, uuid: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshTag>>>;
     /**
+     * Make a GET request to the mesh backend.
+     * @param req The Mesh Request
+     * @param url The url you want to GET
+     * @param params Query params for your request.
+     * @returns {Q.Promise<MeshRestResponse<T>>} A promise that will be fulfilled once the request has been completed
+     *          and will fail if the request fails.
+     */
+    meshGET<T>(req: IMeshRequest, url: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<T>>;
+    /**
+     * Make a request to the mesh backend.
+     * @param method The request method (GET/POST/PUT/DELETE/...)
+     * @param req The Mesh Request
+     * @param url The url you want to GET
+     * @param params Query params for your request.
+     * @param data Data you want to send with the request (PUT/POST)
+     * @returns {Q.Promise<MeshRestResponse<T>>} A promise that will be fulfilled once the request has been completed
+     *          and will fail if the request fails.
+     */
+    meshRequest<T>(method: string, req: IMeshRequest, url: string, params?: MeshQueryParams, data?: any): Q.Promise<MeshRestResponse<T>>;
+    /**
      * Private method that constructs the quest handler, that will serve the Mesh content from webroot.
      * @returns {function(IMeshRequest, express.Response): undefined}
      */

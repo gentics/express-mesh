@@ -208,12 +208,18 @@ export class MeshRestClient {
         });
     }
 
-    private meshSimpleGET<T>(req : IMeshRequest, url : string, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<T>> {
+    public meshSimpleGET<T>(req : IMeshRequest, url : string, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<T>> {
+        return this.meshSimpleRequest<T>('GET', req, url, params);
+    }
+
+    public meshSimpleRequest<T>(method : string, req : IMeshRequest, url : string, params? : MeshQueryParams, data? : any) : Q.Promise<MeshRestResponse<T>> {
         var opts = new MeshRequestOptions(req),
             languages = lang.getLanguageArray(req);
         opts.url = url;
         opts.params = params ? params : new MeshQueryParams();
         opts.params.resolveLinks = 'short';
+        opts.method = method;
+        opts.data = data;
         if (u.isDefined(languages)) {
             opts.params.lang = languages.join(',');
         }

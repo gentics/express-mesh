@@ -120,6 +120,8 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_mesh_.mesh.html#gettagsoftagfamily" class="tsd-kind-icon">get<wbr>Tags<wbr>OfTag<wbr>Family</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_mesh_.mesh.html#login" class="tsd-kind-icon">login</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_mesh_.mesh.html#logout" class="tsd-kind-icon">logout</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="_lib_mesh_.mesh.html#meshget" class="tsd-kind-icon">meshGET</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="_lib_mesh_.mesh.html#meshrequest" class="tsd-kind-icon">mesh<wbr>Request</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_mesh_.mesh.html#registererrorhandler" class="tsd-kind-icon">register<wbr>Error<wbr>Handler</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_lib_mesh_.mesh.html#registermeshmiddleware" class="tsd-kind-icon">register<wbr>Mesh<wbr>Middleware</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="_lib_mesh_.mesh.html#registerschemahandler" class="tsd-kind-icon">register<wbr>Schema<wbr>Handler</a></li>
@@ -443,7 +445,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L434">lib/mesh.ts:434</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L460">lib/mesh.ts:460</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -640,6 +642,120 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="meshget" class="tsd-anchor"></a>
+					<h3>meshGET</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">meshGET&lt;T&gt;<span class="tsd-signature-symbol">(</span>req<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_mesh_.imeshrequest.html" class="tsd-signature-type">IMeshRequest</a>, url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, params<span class="tsd-signature-symbol">?: </span><a href="_lib_mesh_.meshqueryparams.html" class="tsd-signature-type">MeshQueryParams</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_meshrestclient_.meshrestresponse.html" class="tsd-signature-type">MeshRestResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L438">lib/mesh.ts:438</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Make a GET request to the mesh backend.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>req: <a href="../interfaces/_lib_mesh_.imeshrequest.html" class="tsd-signature-type">IMeshRequest</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The Mesh Request</p>
+									</div>
+								</li>
+								<li>
+									<h5>url: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The url you want to GET</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> params: <a href="_lib_mesh_.meshqueryparams.html" class="tsd-signature-type">MeshQueryParams</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Query params for your request.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_meshrestclient_.meshrestresponse.html" class="tsd-signature-type">MeshRestResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise that will be fulfilled once the request has been completed
+							and will fail if the request fails.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="meshrequest" class="tsd-anchor"></a>
+					<h3>mesh<wbr>Request</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">mesh<wbr>Request&lt;T&gt;<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, req<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_mesh_.imeshrequest.html" class="tsd-signature-type">IMeshRequest</a>, url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, params<span class="tsd-signature-symbol">?: </span><a href="_lib_mesh_.meshqueryparams.html" class="tsd-signature-type">MeshQueryParams</a>, data<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_meshrestclient_.meshrestresponse.html" class="tsd-signature-type">MeshRestResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L452">lib/mesh.ts:452</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Make a request to the mesh backend.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>method: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The request method (GET/POST/PUT/DELETE/...)</p>
+									</div>
+								</li>
+								<li>
+									<h5>req: <a href="../interfaces/_lib_mesh_.imeshrequest.html" class="tsd-signature-type">IMeshRequest</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The Mesh Request</p>
+									</div>
+								</li>
+								<li>
+									<h5>url: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The url you want to GET</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> params: <a href="_lib_mesh_.meshqueryparams.html" class="tsd-signature-type">MeshQueryParams</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Query params for your request.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> data: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Data you want to send with the request (PUT/POST)</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_meshrestclient_.meshrestresponse.html" class="tsd-signature-type">MeshRestResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise that will be fulfilled once the request has been completed
+							and will fail if the request fails.</p>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="registererrorhandler" class="tsd-anchor"></a>
 					<h3>register<wbr>Error<wbr>Handler</h3>
@@ -689,7 +805,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L460">lib/mesh.ts:460</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L486">lib/mesh.ts:486</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -768,7 +884,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L485">lib/mesh.ts:485</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L511">lib/mesh.ts:511</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -991,7 +1107,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L494">lib/mesh.ts:494</a></li>
+									<li>Defined in <a href="https://github.com/gentics/express-mesh/blob/master/src/lib/mesh.ts#L520">lib/mesh.ts:520</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1101,6 +1217,12 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_lib_mesh_.mesh.html#logout" class="tsd-kind-icon">logout</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="_lib_mesh_.mesh.html#meshget" class="tsd-kind-icon">meshGET</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="_lib_mesh_.mesh.html#meshrequest" class="tsd-kind-icon">mesh<wbr>Request</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_lib_mesh_.mesh.html#registererrorhandler" class="tsd-kind-icon">register<wbr>Error<wbr>Handler</a>

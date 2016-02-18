@@ -215,6 +215,14 @@ export class MeshRestClient {
     public meshSimpleRequest<T>(method : string, req : IMeshRequest, url : string, params? : MeshQueryParams, data? : any) : Q.Promise<MeshRestResponse<T>> {
         var opts = new MeshRequestOptions(req),
             languages = lang.getLanguageArray(req);
+        if (u.isDefined(url)) {
+            if (url.indexOf(req.meshConfig.base) <= -1) {
+                url = req.meshConfig.base + url;
+            }
+            if (url.indexOf(req.meshConfig.backendUrl) <= -1) {
+                url = req.meshConfig.backendUrl + url;
+            }
+        }
         opts.url = url;
         opts.params = params ? params : new MeshQueryParams();
         opts.params.resolveLinks = 'short';

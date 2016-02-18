@@ -435,7 +435,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
          * @returns {Q.Promise<MeshRestResponse<T>>} A promise that will be fulfilled once the request has been completed
          *          and will fail if the request fails.
          */
-        public meshGET<T>(req : IMeshRequest, url : string, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<T>> {
+        public get<T>(req : IMeshRequest, url : string, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<T>> {
             return this.meshClient.meshSimpleGET<T>(req, url, params);
         }
 
@@ -449,7 +449,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
          * @returns {Q.Promise<MeshRestResponse<T>>} A promise that will be fulfilled once the request has been completed
          *          and will fail if the request fails.
          */
-        public meshRequest<T>(method : string, req : IMeshRequest, url : string, params? : MeshQueryParams, data? : any) : Q.Promise<MeshRestResponse<T>> {
+        public request<T>(method : string, req : IMeshRequest, url : string, params? : MeshQueryParams, data? : any) : Q.Promise<MeshRestResponse<T>> {
             return this.meshClient.meshSimpleRequest<T>(method, req, url, params, data);
         }
 

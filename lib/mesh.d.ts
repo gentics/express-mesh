@@ -344,7 +344,7 @@ export declare class Mesh {
      * @returns {Q.Promise<MeshRestResponse<T>>} A promise that will be fulfilled once the request has been completed
      *          and will fail if the request fails.
      */
-    meshGET<T>(req: IMeshRequest, url: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<T>>;
+    get<T>(req: IMeshRequest, url: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<T>>;
     /**
      * Make a request to the mesh backend.
      * @param method The request method (GET/POST/PUT/DELETE/...)
@@ -355,7 +355,7 @@ export declare class Mesh {
      * @returns {Q.Promise<MeshRestResponse<T>>} A promise that will be fulfilled once the request has been completed
      *          and will fail if the request fails.
      */
-    meshRequest<T>(method: string, req: IMeshRequest, url: string, params?: MeshQueryParams, data?: any): Q.Promise<MeshRestResponse<T>>;
+    request<T>(method: string, req: IMeshRequest, url: string, params?: MeshQueryParams, data?: any): Q.Promise<MeshRestResponse<T>>;
     /**
      * Private method that constructs the quest handler, that will serve the Mesh content from webroot.
      * @returns {function(IMeshRequest, express.Response): undefined}

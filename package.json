@@ -1,9 +1,9 @@
 {
-  "author": "Gentics Zweigstelle der APA-IT",
+  "author": "Gentics Software, branch of APA-IT",
   "name": "express-mesh",
   "description": "A Gentics Mesh frontend for Express.",
   "license": "MIT",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "engines" : { "node" : ">=4.0.0" },
   "dependencies": {
     "express": "4.13.3",

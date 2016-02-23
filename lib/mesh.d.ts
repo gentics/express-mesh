@@ -241,7 +241,7 @@ export declare class Mesh {
      * @param req The mesh request / Express request.
      * @param res The mesh response / Express response.
      */
-    renderMeshNode(node: IMeshNode<any>, req: IMeshRequest, res: IMeshResponse): void;
+    renderNode(node: IMeshNode<any>, req: IMeshRequest, res: IMeshResponse): void;
     /**
      * Render a view.
      * This function will render the provided view.
@@ -279,7 +279,7 @@ export declare class Mesh {
      * @returns {Promise<U>} A promise that will be fulfilled once the search request complets and will be rejected
      *          if the search fails.
      */
-    searchMeshNodes<T>(req: IMeshRequest, query: IMeshSearchQuery, params?: IMeshNodeListQueryParams): Q.Promise<IMeshNodeListResponse<IMeshNode<T>>>;
+    searchNodes<T>(req: IMeshRequest, query: IMeshSearchQuery, params?: IMeshNodeListQueryParams): Q.Promise<IMeshNodeListResponse<IMeshNode<T>>>;
     /**
      * Load all child nodes of a specified node.
      * @param req The mesh request / Express request.
@@ -298,7 +298,7 @@ export declare class Mesh {
      * @returns {Promise<U>} A promise that will be fulfilled once the Mesh node is loaded and will be rejected
      *          if loading of the Mesh node fails.
      */
-    getMeshNode<T>(req: IMeshRequest, uuid: string, params?: MeshQueryParams): Q.Promise<IMeshNode<T>>;
+    getNode<T>(req: IMeshRequest, uuid: string, params?: MeshQueryParams): Q.Promise<IMeshNode<T>>;
     /**
      * Load a navigation object by its path. e.g. / for the root navigation.
      * You can only load navigation objects for container nodes.

@@ -7,7 +7,6 @@ import filters = require('./meshTemplateFilters');
 import lang = require('./meshLanguages');
 import u = require('./meshUtil');
 
-import Session = Express.Session;
 import {MeshConfig} from "./config";
 import {MeshRenderer} from "./meshRenderer";
 import {MeshRestClient} from "./meshRestClient";
@@ -283,7 +282,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
          * @param req The mesh request / Express request.
          * @param res The mesh response / Express response.
          */
-        public renderMeshNode(node : IMeshNode<any>, req : IMeshRequest, res : IMeshResponse) : void {
+        public renderNode(node : IMeshNode<any>, req : IMeshRequest, res : IMeshResponse) : void {
             this.renderer.renderMeshNode(node, req, res);
         }
 
@@ -343,7 +342,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
          * @returns {Promise<U>} A promise that will be fulfilled once the search request complets and will be rejected
          *          if the search fails.
          */
-        public searchMeshNodes<T>(req : IMeshRequest, query : IMeshSearchQuery, params? : IMeshNodeListQueryParams) : Q.Promise<IMeshNodeListResponse<IMeshNode<T>>> {
+        public searchNodes<T>(req : IMeshRequest, query : IMeshSearchQuery, params? : IMeshNodeListQueryParams) : Q.Promise<IMeshNodeListResponse<IMeshNode<T>>> {
             return this.meshClient.meshSearch<IMeshNode<T>>(req, query, params).then((response)=> {
                 return response.data;
             });
@@ -372,7 +371,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
          * @returns {Promise<U>} A promise that will be fulfilled once the Mesh node is loaded and will be rejected
          *          if loading of the Mesh node fails.
          */
-        public getMeshNode<T>(req : IMeshRequest, uuid : string, params? : MeshQueryParams) : Q.Promise<IMeshNode<T>> {
+        public getNode<T>(req : IMeshRequest, uuid : string, params? : MeshQueryParams) : Q.Promise<IMeshNode<T>> {
             return this.meshClient.getMeshNode<T>(req, uuid, params).then((response)=> {
                 return response.data;
             });
@@ -493,7 +492,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
                 }
                 // polifill for express-session
                 if (!u.isDefined(req.session)) {
-                    req.session = <Session>{};
+                    req.session = <Express.Session>{};
                 }
                 lang.readLanguageFiles(this.config);
                 next();

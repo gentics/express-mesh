@@ -128,7 +128,7 @@ export class MeshRestClient {
     }
 
     public getWebrootNode<T>(req : IMeshRequest, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNode<T>>> {
-        var url = req.originalUrl;
+        var url = req.path;
         if (typeof url === 'undefined' || u.getPath(url) === '/') {
             url = req.meshConfig.index;
         }

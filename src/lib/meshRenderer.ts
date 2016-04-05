@@ -104,7 +104,7 @@ export class MeshRenderer {
         var schema : IMeshRef = u.isDefined(node) && u.isDefined(node.schema) ? node.schema : {},
             key : string = u.isDefined(schema.name) ? schema.name : schema.uuid;
         if (u.isDefined(key)) {
-            this.handleMicroNodeFields(node).then((node : IMeshNode<T>) => {
+            this.handleMicroNodeFields(node, req , res).then((node : IMeshNode<T>) => {
                 return this.schemaHandlerStore.workSchemaHandlers(key, node, req, res);
             })
             .then((node : IMeshNode<T>) => {
@@ -159,13 +159,13 @@ export class MeshRenderer {
         })
     }
 
-    private handleMicroNodeFields<T>(node : IMeshNode<T>) : Q.Promise<IMeshNode<T>> {
+    private handleMicroNodeFields<T>(node : IMeshNode<T>, req : IMeshRequest, res : IMeshResponse) : Q.Promise<IMeshNode<T>> {
         var deferred = Q.defer<IMeshNode<T>>(),
             promises = [];
         if (u.isDefined(node) && u.isDefined(node.fields)) {
             Object.keys(node.fields).forEach((key) => {
                 var field = node.fields[key];
-                promises.push(this.resolveField(field).then((resolved)=>{
+                promises.push(this.resolveField(field, req, res).then((resolved)=>{
                     node.fields[key] = resolved;
                 }));
             });
@@ -178,13 +178,13 @@ export class MeshRenderer {
         return deferred.promise;
     }
 
-    private resolveField(field : any) : Q.Promise<any> {
+    private resolveField(field : any, req : IMeshRequest, res : IMeshResponse) : Q.Promise<any> {
         var listpromises = [];
         if (u.isDefined(field) && Array.isArray(field)) {
             field.forEach((listitem)=>{
                 // check if there is a schema, if not we just add the node itself
                 if (u.isDefined(listitem.schema) || u.isDefined(listitem.microschema) ) {
-                    listpromises.push(this.meshNodeToString(listitem));
+                    listpromises.push(this.meshNodeToString(listitem, req, res));
                 } else {
                     listpromises.push(Q.fcall(()=>{
                         return listitem;
@@ -193,7 +193,7 @@ export class MeshRenderer {
             });
             return Q.all(listpromises);
         } else if (u.isDefined(field) && (u.isDefined(field.schema) || u.isDefined(field.microschema))) {
-            return this.meshNodeToString(field);
+            return this.meshNodeToString(field, req, res);
         } else {
             return Q.fcall(()=>{
                 return field;
@@ -201,11 +201,11 @@ export class MeshRenderer {
         }
     }
 
-    private meshNodeToString<T>(node : IMeshNode<T>) : Q.Promise<string> {
+    private meshNodeToString<T>(node : IMeshNode<T>, req : IMeshRequest, res : IMeshResponse) : Q.Promise<string> {
         var deferred = Q.defer<string>(),
             key : string = u.isDefined(node) ? this.getSchemaKey(node): undefined;
         if (u.isDefined(key)) {
-            this.schemaHandlerStore.workSchemaHandlers(key, node).then((node : IMeshNode<T>) => {
+            this.schemaHandlerStore.workSchemaHandlers(key, node, req, res).then((node : IMeshNode<T>) => {
                 this.viewExists(key).then(() => {
                     this.renderTemplate(key, node).then((html : string) => {
                         deferred.resolve(html);

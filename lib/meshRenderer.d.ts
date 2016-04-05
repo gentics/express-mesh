@@ -56,9 +56,9 @@ export declare class MeshRenderer {
     renderError(status: number, req: IMeshRequest, res: IMeshResponse, err?: any): void;
     private viewExists(name);
     renderView(name: string, data: RenderData, req: IMeshRequest, res: IMeshResponse): void;
-    private handleMicroNodeFields<T>(node);
-    private resolveField(field);
-    private meshNodeToString<T>(node);
+    private handleMicroNodeFields<T>(node, req, res);
+    private resolveField(field, req, res);
+    private meshNodeToString<T>(node, req, res);
     private getSchemaKey<T>(node);
     private renderTemplate(name, data);
     getRenderData<T>(node: IMeshNode<T>, req: IMeshRequest): RenderData;

@@ -151,10 +151,13 @@ export class MeshRestClient {
         });
     }
 
-    public getChildren<T>(req : IMeshRequest, uuid : string, lang : string, params? : IMeshNodeListQueryParams) : Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshNode<T>>>> {
+    public getChildren<T>(req : IMeshRequest, uuid : string, lang? : string, params? : IMeshNodeListQueryParams) : Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshNode<T>>>> {
         var sort = (params && params.orderBy ? params.orderBy : "created"),
-            query =
-        {"filter":{"bool":{"must":[{"term":{"parentNode.uuid":uuid}},{"term":{"language":lang}}],"_cache":true}},"sort":{}};
+            query : any =
+        {"filter":{"bool":{"must":[{"term":{"parentNode.uuid":uuid}}],"_cache":true}},"sort":{}};
+        if (lang) {
+            query.filter.bool.must.push({"term": {"language" : lang} });
+        }
         query.sort[sort] = {"order":"asc"};
         return this.meshSearch<IMeshNode<T>>(req, query, params);
     }

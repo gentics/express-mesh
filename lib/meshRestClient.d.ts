@@ -80,8 +80,8 @@ export declare class MeshRestClient {
      * @param maxDepth
      * @returns {Q.Promise<MeshRestResponse<IMeshNav>>}
      */
-    getNavigationByPath(req: IMeshRequest, path: string, maxDepth?: number): Q.Promise<MeshRestResponse<IMeshNav>>;
-    getNavigationByUUID(req: IMeshRequest, uuid: string, maxDepth?: number): Q.Promise<MeshRestResponse<IMeshNav>>;
+    getNavigationByPath(req: IMeshRequest, path: string, maxDepth?: number, includeAll?: boolean): Q.Promise<MeshRestResponse<IMeshNav>>;
+    getNavigationByUUID(req: IMeshRequest, uuid: string, maxDepth?: number, includeAll?: boolean): Q.Promise<MeshRestResponse<IMeshNav>>;
     getWebrootNode<T>(req: IMeshRequest, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNode<T>>>;
     getMeshNode<T>(req: IMeshRequest, uuid: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNode<T>>>;
     getChildren<T>(req: IMeshRequest, uuid: string, lang?: string, params?: IMeshNodeListQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshNode<T>>>>;

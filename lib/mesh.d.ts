@@ -44,6 +44,7 @@ export declare class MeshQueryParams implements IMeshNodeListQueryParams {
     orderBy: string;
     lang: string;
     maxDepth: number;
+    includeAll: boolean;
 }
 /**
  * Mesh response of a list of Mesh Objects.

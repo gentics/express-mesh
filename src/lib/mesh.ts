@@ -57,6 +57,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
         public orderBy : string;
         public lang : string;
         public maxDepth : number;
+        public includeAll : boolean;
     }
 
     /**

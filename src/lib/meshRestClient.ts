@@ -138,6 +138,9 @@ export class MeshRestClient {
         if (typeof url === 'undefined' || u.getPath(url) === '/') {
             url = req.meshConfig.index;
         }
+        if (!params) {
+            params = req.query;
+        }
         url = req.meshConfig.backendUrl + req.meshConfig.base + req.meshConfig.project + req.meshConfig.webroot + url;
         return this.meshSimpleGET<IMeshNode<T>>(req, url, params).then((response : MeshRestResponse<IMeshNode<T>>)=>{
             if (req.meshConfig.checkPublished && !response.isBinary && !response.data.published) {

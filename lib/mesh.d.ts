@@ -154,6 +154,7 @@ export interface IMeshNode<T> {
     permissions: Array<MeshPermission>;
     language: string;
     availableLanguages: Array<string>;
+    path?: string;
     languagePaths?: {
         [key: string]: string;
     };

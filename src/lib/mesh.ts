@@ -354,13 +354,12 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
          * Load all child nodes of a specified node.
          * @param req The mesh request / Express request.
          * @param uuid The specified node, which children should be loaded.
-         * @param lang The language the nodes should be loaded in.
-         * @param opts NodeListParams to implement pagination.
+         * @param params QueryParams to specify the language and other options.
          * @returns {Promise<U>} A promise that will be fulfilled once the children have been loaded and will be rejected
          *          if loading the children fails.
          */
-        public getChildren<T>(req : IMeshRequest, uuid : string, lang : string, opts? : IMeshNodeListQueryParams) : Q.Promise<IMeshNodeListResponse<IMeshNode<T>>> {
-            return this.meshClient.getChildren<T>(req, uuid, lang, opts).then((response) => {
+        public getChildren<T>(req : IMeshRequest, uuid : string, lang : string, params? : MeshQueryParams) : Q.Promise<IMeshNodeListResponse<IMeshNode<T>>> {
+            return this.meshClient.getChildren<T>(req, uuid, params).then((response) => {
                 return response.data;
             });
         }

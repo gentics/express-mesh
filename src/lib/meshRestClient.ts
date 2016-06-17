@@ -160,15 +160,9 @@ export class MeshRestClient {
         });
     }
 
-    public getChildren<T>(req : IMeshRequest, uuid : string, lang? : string, params? : IMeshNodeListQueryParams) : Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshNode<T>>>> {
-        var sort = (params && params.orderBy ? params.orderBy : "created"),
-            query : any =
-        {"filter":{"bool":{"must":[{"term":{"parentNode.uuid":uuid}}],"_cache":true}},"sort":{}};
-        if (lang) {
-            query.filter.bool.must.push({"term": {"language" : lang} });
-        }
-        query.sort[sort] = {"order":"asc"};
-        return this.meshSearch<IMeshNode<T>>(req, query, params);
+    public getChildren<T>(req : IMeshRequest, uuid : string, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshNode<T>>>> {
+        var url = req.meshConfig.backendUrl + req.meshConfig.base + req.meshConfig.project + MeshRestClient.NODES_ENDPOINT + uuid + "/children";
+        return this.meshSimpleGET<IMeshNodeListResponse<IMeshNode<T>>>(req, url, params);
     }
 
     public meshSearch<T>(req : IMeshRequest, query : IMeshSearchQuery, params? : IMeshNodeListQueryParams) : Q.Promise<MeshRestResponse<IMeshNodeListResponse<T>>> {
@@ -240,7 +234,7 @@ export class MeshRestClient {
         opts.params.resolveLinks = 'short';
         opts.method = method;
         opts.data = data;
-        if (u.isDefined(languages)) {
+        if (u.isDefined(languages) && !opts.params.lang) {
             opts.params.lang = languages.join(',');
         }
         return this.makeMeshRequest(opts);

@@ -84,7 +84,7 @@ export declare class MeshRestClient {
     getNavigationByUUID(req: IMeshRequest, uuid: string, maxDepth?: number, includeAll?: boolean): Q.Promise<MeshRestResponse<IMeshNav>>;
     getWebrootNode<T>(req: IMeshRequest, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNode<T>>>;
     getMeshNode<T>(req: IMeshRequest, uuid: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNode<T>>>;
-    getChildren<T>(req: IMeshRequest, uuid: string, lang?: string, params?: IMeshNodeListQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshNode<T>>>>;
+    getChildren<T>(req: IMeshRequest, uuid: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshNode<T>>>>;
     meshSearch<T>(req: IMeshRequest, query: IMeshSearchQuery, params?: IMeshNodeListQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<T>>>;
     getTagFamilies(req: IMeshRequest, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshTagFamily>>>;
     getTagsOfTagFamily(req: IMeshRequest, uuid: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshTag>>>;

@@ -43,6 +43,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
         lang?:string
         resolveLinks?:string;
         maxDepth?:number;
+        includeAll?: boolean;
     }
 
     /**
@@ -358,7 +359,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
          * @returns {Promise<U>} A promise that will be fulfilled once the children have been loaded and will be rejected
          *          if loading the children fails.
          */
-        public getChildren<T>(req : IMeshRequest, uuid : string, lang : string, params? : MeshQueryParams) : Q.Promise<IMeshNodeListResponse<IMeshNode<T>>> {
+        public getChildren<T>(req : IMeshRequest, uuid : string, params? : MeshQueryParams) : Q.Promise<IMeshNodeListResponse<IMeshNode<T>>> {
             return this.meshClient.getChildren<T>(req, uuid, params).then((response) => {
                 return response.data;
             });
@@ -383,13 +384,12 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
          * You can only load navigation objects for container nodes.
          * @param req The mesh request / Express request.
          * @param path The path for which the navigation object should be loaded.
-         * @param maxDepth Maximal depth of the loaded navigation tree.
-         * @param includeAll When true, all nodes are loaded, else only container nodes.
+         * @param params QueryParams to specify the language, navigation depth, includeAll and other options.
          * @returns {Q.Promise<MeshRestResponse<IMeshNav>>} A promise that will be fulfilled once the navigation object
          *          has been loaded and will be rejected if loading of the navigation object fails.
          */
-        public getNavigationByPath(req : IMeshRequest, path : string, maxDepth? : number, includeAll? : boolean) : Q.Promise<MeshRestResponse<IMeshNav>> {
-            return this.meshClient.getNavigationByPath(req, path, maxDepth, includeAll);
+        public getNavigationByPath(req : IMeshRequest, path : string, params: MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNav>> {
+            return this.meshClient.getNavigationByPath(req, path, params);
         }
 
         /**
@@ -397,13 +397,12 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
          * You can only load navigation objects for container nodes.
          * @param req The mesh request / Express request.
          * @param uuid The uuid of the root node of the navigation tree you want to load.
-         * @param maxDepth Maximal depth of the loaded navigation tree.
-         * @param includeAll When true, all nodes are loaded, else only container nodes.
+         * @param params QueryParams to specify the language, navigation depth, includeAll and other options.
          * @returns {Q.Promise<MeshRestResponse<IMeshNav>>} A promise that will be fulfilled once the navigation object
          *          has been loaded and will be rejected if loading of the navigation object fails.
          */
-        public getNavigationByUUID(req : IMeshRequest, uuid : string, maxDepth? : number, includeAll? : boolean) : Q.Promise<MeshRestResponse<IMeshNav>> {
-            return this.meshClient.getNavigationByUUID(req, uuid, maxDepth, includeAll);
+        public getNavigationByUUID(req : IMeshRequest, uuid : string, params: MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNav>> {
+            return this.meshClient.getNavigationByUUID(req, uuid, params);
         }
 
         /**

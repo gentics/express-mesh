@@ -109,25 +109,19 @@ export class MeshRestClient {
      * @param maxDepth
      * @returns {Q.Promise<MeshRestResponse<IMeshNav>>}
      */
-    public getNavigationByPath(req : IMeshRequest, path : string, maxDepth? : number, includeAll? : boolean) : Q.Promise<MeshRestResponse<IMeshNav>> {
+    public getNavigationByPath(req : IMeshRequest, path : string, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNav>> {
         var url = req.meshConfig.backendUrl + req.meshConfig.base + req.meshConfig.project + req.meshConfig.navroot + path,
-            params = new MeshQueryParams();
-        params.maxDepth = maxDepth ? maxDepth : 10;
-        if (typeof includeAll !== "undefined") {
-            params.includeAll = includeAll
-        }
+            params = params ? params : new MeshQueryParams();
+        params.maxDepth = params.maxDepth ? params.maxDepth : 10;
         return this.meshSimpleGET(req, url, params).then((response : MeshRestResponse<IMeshNav>)=>{
             return response;
         });
     }
 
-    public getNavigationByUUID(req : IMeshRequest, uuid : string, maxDepth? : number, includeAll? : boolean) : Q.Promise<MeshRestResponse<IMeshNav>> {
+    public getNavigationByUUID(req : IMeshRequest, uuid : string, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNav>> {
         var url = req.meshConfig.backendUrl + req.meshConfig.base + req.meshConfig.project + MeshRestClient.NODES_ENDPOINT + uuid + MeshRestClient.NAVIGATION_ENDPOINT,
-            params = new MeshQueryParams();
-        params.maxDepth = maxDepth ? maxDepth : 10;
-        if (typeof includeAll !== "undefined") {
-            params.includeAll = includeAll
-        }
+            params = params ? params : new MeshQueryParams();
+        params.maxDepth = params.maxDepth ? params.maxDepth : 10;
         return this.meshSimpleGET(req,url, params).then((response : MeshRestResponse<IMeshNav>)=>{
             return response;
         });

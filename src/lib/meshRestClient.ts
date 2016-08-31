@@ -165,7 +165,9 @@ export class MeshRestClient {
         opts.url = opts.url = req.meshConfig.backendUrl + req.meshConfig.base + 'search/nodes';
         opts.params = params;
         opts.params.resolveLinks = 'short';
-        if (u.isDefined(languages)) {
+        if (params.lang) {
+            opts.params.lang = params.lang
+        } else if (u.isDefined(languages)) {
             opts.params.lang = languages.join(',');
         }
         return this.meshPOST(opts, query);

@@ -8,6 +8,7 @@ import express = require('express');
 import handler = require('./meshHandlerStore');
 import lang = require('./meshLanguages');
 import filter = require('./meshTemplateFilters');
+import querystring = require('querystring');
 
 
 import {IMeshRequest} from "./mesh";
@@ -34,7 +35,7 @@ export class RenderInformation {
      * @param req The MeshRequest.
      * @param node The MeshNode that should be rendered.
      */
-    constructor(req : IMeshRequest, node? : IMeshNode<any>) {
+    constructor(req : any, node? : IMeshNode<any>) {
         this.activeLanguage = lang.getActiveLanguage(req);
         if (u.isDefined(node)) {
             this.availableLanguages = node.availableLanguages;
@@ -44,7 +45,9 @@ export class RenderInformation {
         } else {
             this.availableLanguages = req.meshConfig.languages;
             this.availableLanguages.forEach((lang : string) => {
-                this.languageURLs[lang] = '?lang=' + lang;
+                var params = JSON.parse(JSON.stringify(req.query));
+                params.lang = lang;
+                this.languageURLs[lang] = '?' + querystring.stringify(params);
             });
         }
         this.username = req.session[meshClient.MeshAuth.MESH_USER_SESSION_KEY] ?

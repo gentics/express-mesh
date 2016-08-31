@@ -21,7 +21,7 @@ export declare class RenderInformation {
      * @param req The MeshRequest.
      * @param node The MeshNode that should be rendered.
      */
-    constructor(req: IMeshRequest, node?: IMeshNode<any>);
+    constructor(req: any, node?: IMeshNode<any>);
 }
 /**
  * Render data that is passed to the rendered template and contains the data that should be rendered.

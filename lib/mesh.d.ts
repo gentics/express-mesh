@@ -58,7 +58,7 @@ export interface IMeshNodeListResponse<T> {
  * Meta information contained in IMeshNodeListResponse
  */
 export interface IMeshMetaInfo {
-    page: number;
+    currentPage: number;
     pageCount: number;
     perPage: number;
     totalCount: number;

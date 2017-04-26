@@ -137,7 +137,7 @@ export class MeshRestClient {
         }
         url = req.meshConfig.backendUrl + req.meshConfig.base + req.meshConfig.project + req.meshConfig.webroot + url;
         return this.meshSimpleGET<IMeshNode<T>>(req, url, params).then((response : MeshRestResponse<IMeshNode<T>>)=>{
-            if (req.meshConfig.checkPublished && !response.isBinary && !response.data.published) {
+            if (req.meshConfig.checkPublished && !response.isBinary && !response.data.published && response.status < 400) {
                 response.status = 404;
             }
             return response;
@@ -147,7 +147,7 @@ export class MeshRestClient {
     public getMeshNode<T>(req : IMeshRequest, uuid : string, params? : MeshQueryParams) : Q.Promise<MeshRestResponse<IMeshNode<T>>> {
         var url = req.meshConfig.backendUrl + req.meshConfig.base + req.meshConfig.project + MeshRestClient.NODES_ENDPOINT + uuid;
         return this.meshSimpleGET<IMeshNode<T>>(req, url, params).then((response : MeshRestResponse<IMeshNode<T>>)=>{
-            if (req.meshConfig.checkPublished && !response.isBinary && !response.data.published) {
+            if (req.meshConfig.checkPublished && !response.isBinary && !response.data.published && response.status < 400) {
                 response.status = 404;
             }
             return response;

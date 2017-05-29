@@ -30,7 +30,7 @@ export interface IMeshConfigBase {
     project?: string;
     auth?: string;
     checkPublished?: boolean;
-    publicUser?: MeshAuthUser;
+    apiToken?: string;
     index?: string;
     defaultErrorView?: string;
     defaultView?: string;
@@ -63,7 +63,7 @@ export declare class MeshConfig {
     project: string;
     auth: string;
     checkPublished: boolean;
-    publicUser: MeshAuthUser;
+    apiToken: string;
     index: string;
     defaultErrorView: string;
     defaultView: string;

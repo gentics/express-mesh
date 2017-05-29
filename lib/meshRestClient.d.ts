@@ -30,9 +30,6 @@ export declare enum MeshAuthType {
  * Mesh authentication obejct.
  */
 export declare class MeshAuth {
-    static MESH_USER_SESSION_KEY: string;
-    static MESH_PASSWORD_SESSION_KEY: string;
-    type: MeshAuthType;
     header: string;
     /**
      * Initialize the Mesh authentication object.
@@ -41,12 +38,11 @@ export declare class MeshAuth {
      */
     constructor(request: IMeshRequest);
     /**
-     * Generate basic auth header from username and password.
-     * @param username Username
-     * @param password Password
+     * Generate auth header using the given token.
+     * @param token Token
      * @returns {string} Header string.
      */
-    private getBasicAuthHeader(username, password);
+    private getAuthHeader(token);
 }
 /**
  * Options for making Mesh Requests.
@@ -85,7 +81,7 @@ export declare class MeshRestClient {
     getWebrootNode<T>(req: IMeshRequest, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNode<T>>>;
     getMeshNode<T>(req: IMeshRequest, uuid: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNode<T>>>;
     getChildren<T>(req: IMeshRequest, uuid: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshNode<T>>>>;
-    meshSearch<T>(req: IMeshRequest, query: IMeshSearchQuery, params?: IMeshNodeListQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<T>>>;
+    meshSearch<T>(req: IMeshRequest, query: IMeshSearchQuery, projectName: string, params?: IMeshNodeListQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<T>>>;
     getTagFamilies(req: IMeshRequest, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshTagFamily>>>;
     getTagsOfTagFamily(req: IMeshRequest, uuid: string, params?: MeshQueryParams): Q.Promise<MeshRestResponse<IMeshNodeListResponse<IMeshTag>>>;
     login(req: IMeshRequest, username: string, password: string): Q.Promise<boolean>;

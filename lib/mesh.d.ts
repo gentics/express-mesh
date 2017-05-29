@@ -31,6 +31,7 @@ export interface IMeshNodeListQueryParams {
     lang?: string;
     resolveLinks?: string;
     maxDepth?: number;
+    version?: string;
     includeAll?: boolean;
 }
 /**
@@ -45,6 +46,7 @@ export declare class MeshQueryParams implements IMeshNodeListQueryParams {
     orderBy: string;
     lang: string;
     maxDepth: number;
+    version: string;
     includeAll: boolean;
 }
 /**
@@ -277,12 +279,13 @@ export declare class Mesh {
     /**
      * Perform a search for Mesh Nodes.
      * @param req The mesh request / Express request.
+     * @param projectName Name of the project
      * @param query The elastic search query object.
      * @param params NodeListParams to implement pagination.
      * @returns {Promise<U>} A promise that will be fulfilled once the search request complets and will be rejected
      *          if the search fails.
      */
-    searchNodes<T>(req: IMeshRequest, query: IMeshSearchQuery, params?: IMeshNodeListQueryParams): Q.Promise<IMeshNodeListResponse<IMeshNode<T>>>;
+    searchNodes<T>(req: IMeshRequest, query: IMeshSearchQuery, projectName: string, params?: IMeshNodeListQueryParams): Q.Promise<IMeshNodeListResponse<IMeshNode<T>>>;
     /**
      * Load all child nodes of a specified node.
      * @param req The mesh request / Express request.

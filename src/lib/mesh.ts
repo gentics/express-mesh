@@ -43,6 +43,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
         lang?:string
         resolveLinks?:string;
         maxDepth?:number;
+        version?:string;
         includeAll?: boolean;
     }
 
@@ -58,6 +59,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
         public orderBy : string;
         public lang : string;
         public maxDepth : number;
+        public version : string;
         public includeAll : boolean;
     }
 
@@ -315,8 +317,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
         public login(req : IMeshRequest, username : string, password : string) : Q.Promise<boolean> {
             return this.meshClient.login(req, username, password).then((loggedin) => {
                 if (loggedin === true) {
-                    req.session[rest.MeshAuth.MESH_USER_SESSION_KEY] = username;
-                    req.session[rest.MeshAuth.MESH_PASSWORD_SESSION_KEY] = password;
+                    //TODO extract token
                 }
                 return loggedin;
             });
@@ -331,8 +332,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
          */
         public logout(req : IMeshRequest) : Q.Promise<boolean> {
             return this.meshClient.logout(req).then((loggedout) => {
-                req.session[rest.MeshAuth.MESH_USER_SESSION_KEY] = undefined;
-                req.session[rest.MeshAuth.MESH_PASSWORD_SESSION_KEY] = undefined;
+                //TODO remove token
                 return loggedout;
             })
         }
@@ -340,13 +340,14 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
         /**
          * Perform a search for Mesh Nodes.
          * @param req The mesh request / Express request.
+         * @param projectName Name of the project
          * @param query The elastic search query object.
          * @param params NodeListParams to implement pagination.
          * @returns {Promise<U>} A promise that will be fulfilled once the search request complets and will be rejected
          *          if the search fails.
          */
-        public searchNodes<T>(req : IMeshRequest, query : IMeshSearchQuery, params? : IMeshNodeListQueryParams) : Q.Promise<IMeshNodeListResponse<IMeshNode<T>>> {
-            return this.meshClient.meshSearch<IMeshNode<T>>(req, query, params).then((response)=> {
+        public searchNodes<T>(req : IMeshRequest, query : IMeshSearchQuery, projectName : string, params? : IMeshNodeListQueryParams) : Q.Promise<IMeshNodeListResponse<IMeshNode<T>>> {
+            return this.meshClient.meshSearch<IMeshNode<T>>(req, query, projectName, params).then((response)=> {
                 return response.data;
             });
         }
@@ -460,7 +461,9 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
          */
         private getRequestHandler() : (req : express.Request, res : express.Response)=>void {
             return (req : IMeshRequest, res : express.Response) => {
-                this.meshClient.getWebrootNode<IMeshNode<any>>(req).then((response : MeshRestResponse<IMeshNode<any>>) => {
+                var params = new MeshQueryParams();
+                params.version= "published";
+                this.meshClient.getWebrootNode<IMeshNode<any>>(req,params).then((response : MeshRestResponse<IMeshNode<any>>) => {
                     var status = Number(response.status);
                     if (status < 400) {
                         res.status(response.status);

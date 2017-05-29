@@ -37,10 +37,7 @@ export enum MeshAuthType {
  * Mesh authentication obejct.
  */
 export class MeshAuth {
-    public static MESH_USER_SESSION_KEY = 'meshusername';
-    public static MESH_PASSWORD_SESSION_KEY = 'meshpassword';
 
-    type : MeshAuthType;
     header : string;
 
     /**
@@ -49,23 +46,16 @@ export class MeshAuth {
      * @param request The MeshRequest
      */
     constructor(request : IMeshRequest) {
-        this.type = MeshAuthType.BASIC;
-        if (u.isDefined(request.session[MeshAuth.MESH_USER_SESSION_KEY]) && u.isDefined(request.session[MeshAuth.MESH_PASSWORD_SESSION_KEY])) {
-            this.header = this.getBasicAuthHeader(request.session[MeshAuth.MESH_USER_SESSION_KEY],
-                request.session[MeshAuth.MESH_PASSWORD_SESSION_KEY]);
-        } else {
-            this.header = this.getBasicAuthHeader(request.meshConfig.publicUser.username, request.meshConfig.publicUser.password);
-        }
+        this.header = this.getAuthHeader(request.meshConfig.apiToken);
     }
 
     /**
-     * Generate basic auth header from username and password.
-     * @param username Username
-     * @param password Password
+     * Generate auth header using the given token.
+     * @param token Token
      * @returns {string} Header string.
      */
-    private getBasicAuthHeader(username : string, password : string) : string {
-        return 'Basic ' + new Buffer(username + ':' + password).toString('base64');
+    private getAuthHeader(token : string) : string {
+        return 'Bearer ' + token;
     }
 }
 
@@ -159,10 +149,10 @@ export class MeshRestClient {
         return this.meshSimpleGET<IMeshNodeListResponse<IMeshNode<T>>>(req, url, params);
     }
 
-    public meshSearch<T>(req : IMeshRequest, query : IMeshSearchQuery, params? : IMeshNodeListQueryParams) : Q.Promise<MeshRestResponse<IMeshNodeListResponse<T>>> {
+    public meshSearch<T>(req : IMeshRequest, query : IMeshSearchQuery, projectName : string, params? : IMeshNodeListQueryParams) : Q.Promise<MeshRestResponse<IMeshNodeListResponse<T>>> {
         var opts = new MeshRequestOptions(req),
             languages = lang.getLanguageArray(req);
-        opts.url = opts.url = req.meshConfig.backendUrl + req.meshConfig.base + 'search/nodes';
+        opts.url = opts.url = req.meshConfig.backendUrl + req.meshConfig.base + projectName + '/search/nodes';
         opts.params = params;
         opts.params.resolveLinks = 'short';
         if (params.lang) {
@@ -282,7 +272,7 @@ export class MeshRestClient {
             options.headers['Content-Type'] = 'application/json';
             options.headers['Content-Length'] = Buffer.byteLength(data);
         }
-        if (requestOptions.auth && requestOptions.auth.type === MeshAuthType.BASIC) {
+        if (requestOptions.auth) {
             options.headers['Authorization'] = requestOptions.auth.header;
         }
         var starttime = Date.now(),

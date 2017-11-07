@@ -276,7 +276,8 @@ export class MeshRestClient {
             options.headers['Authorization'] = requestOptions.auth.header;
         }
         var starttime = Date.now(),
-            req = http.request(options, (res) => {
+            client = urlString.startsWith("https") ? https : http;
+            req = client.request(options, (res) => {
             var data = '';
             if (res.statusCode === 401 || res.statusCode === 403) {
                 console.error(res.statusCode, res.statusMessage, 'Check your mesh user.');

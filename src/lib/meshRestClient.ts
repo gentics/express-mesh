@@ -6,7 +6,6 @@ import URL = require('url');
 import u = require('./meshUtil');
 import lang = require('./meshLanguages');
 
-
 import {LoggingConfig} from "./config";
 import {IMeshRequest} from "./mesh";
 import {IMeshNodeListQueryParams} from "./mesh";
@@ -247,6 +246,10 @@ export class MeshRestClient {
         return queryString.substr(0, queryString.length - 1);
     }
 
+    private startsWith(str: string, word: string): boolean {
+        return str.lastIndexOf(word, 0) === 0;
+    }
+
     private makeMeshRequest(requestOptions : MeshRequestOptions) : Q.Promise<MeshRestResponse<any>> {
         var deferred = Q.defer<MeshRestResponse<any>>(),
             options : https.RequestOptions = {},
@@ -275,8 +278,8 @@ export class MeshRestClient {
         if (requestOptions.auth) {
             options.headers['Authorization'] = requestOptions.auth.header;
         }
+        var client = this.startsWith(urlString, "https") ? https : http;
         var starttime = Date.now(),
-            client = urlString.startsWith("https") ? https : http;
             req = client.request(options, (res) => {
             var data = '';
             if (res.statusCode === 401 || res.statusCode === 403) {

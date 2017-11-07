@@ -93,5 +93,6 @@ export declare class MeshRestClient {
      * Convert a queryParams object into a URL-encoded string.
      */
     private queryStringFromParams(queryParams);
+    private startsWith(str, word);
     private makeMeshRequest(requestOptions);
 }

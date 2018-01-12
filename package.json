@@ -3,7 +3,7 @@
   "name": "express-mesh",
   "description": "A Gentics Mesh frontend for Express.",
   "license": "MIT",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "engines": {
     "node": ">=4.0.0"
   },

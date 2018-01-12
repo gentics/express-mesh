@@ -25,7 +25,15 @@ export declare function setActiveLanguage(req: IMeshRequest, lang: string): void
 export declare function getLanguageArray(req: IMeshRequest): Array<string>;
 /**
  * Template filter to translate strings.
+ * The language will be chosen from previous requests.
  * @param input String that should be translated.
  * @returns {string|any} Translated string or string if no translation is defined.
  */
-export declare function translateFilter(input: string): string;
+export declare function translateFilter(input: string): any;
+/**
+ * Template filter to translate strings.
+ * @param input String that should be translated.
+ * @param language The language to translate to.
+ * @returns {string|any} Translated string or string if no translation is defined.
+ */
+export declare function translateFilter(input: string, language: string): any;

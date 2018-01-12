@@ -23,6 +23,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
      */
     export interface IMeshRequest extends express.Request {
         meshConfig : MeshConfig;
+        requestedNode: IMeshNode<any>;
     }
 
     /**
@@ -467,6 +468,7 @@ import {IFilterRegisterFunction} from "./meshTemplateFilters";
                         if (response.isBinary) {
                             response.stream.pipe(res);
                         } else {
+                            req.requestedNode = response.data;
                             this.renderer.renderMeshNode(response.data, req, res);
                         }
                     } else {

@@ -91,13 +91,25 @@ export function getLanguageArray(req : IMeshRequest) : Array<string> {
 
 /**
  * Template filter to translate strings.
+ * The language will be chosen from previous requests.
  * @param input String that should be translated.
  * @returns {string|any} Translated string or string if no translation is defined.
  */
-export function translateFilter(input : string) : string {
+export function translateFilter(input: string);
+/**
+ * Template filter to translate strings.
+ * @param input String that should be translated.
+ * @param language The language to translate to.
+ * @returns {string|any} Translated string or string if no translation is defined.
+ */
+export function translateFilter(input: string, language: string);
+export function translateFilter(input: string, language?: string) : string {
+    if (!language) {
+        language = actLang;
+    }
     var replacement;
     replacement = u.isDefined(input)
-        && u.isDefined(langCache[actLang])
-        && u.isDefined(langCache[actLang][input]) ? langCache[actLang][input] : input;
+        && u.isDefined(langCache[language])
+        && u.isDefined(langCache[language][input]) ? langCache[language][input] : input;
     return replacement;
 }

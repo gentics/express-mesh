@@ -13,6 +13,7 @@ import { IFilterRegisterFunction } from "./meshTemplateFilters";
  */
 export interface IMeshRequest extends express.Request {
     meshConfig: MeshConfig;
+    requestedNode: IMeshNode<any>;
 }
 /**
  * Wrapper for the express.Response.

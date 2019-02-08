@@ -1,3 +1,7 @@
+# PROJECT ARCHIVED
+
+# This project has been archived and will no longer be maintained.
+
 express-mesh
 ===============
 An extension for express to serve content from Gentics Mesh.
